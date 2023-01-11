@@ -1,1 +1,94 @@
-<p>contact-us works!</p>
+<div class="container my-2">
+    <div class="row my-4">
+      <div class="col-md-4" *ngIf="!timerFlag">
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+        <div class="col-md-4" *ngIf="timerFlag">
+          <div class="mx-auto my-2">
+          <form #frm = "ngForm" (ngSubmit)="submit(frm.value)">
+            <mat-form-field appearance="fill" class="mx-auto">
+                <mat-label>Enter First name</mat-label>
+                <input matInput placeholder="Placeholder" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required name="firstname" #firstname="ngModel" ngModel>
+                <mat-error>First Name Must not be Blank</mat-error>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>profile</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="mx-auto">
+                <mat-label>Enter Last name</mat-label>
+                <input matInput placeholder="Placeholder" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required name="lastname" #lastname="ngModel" ngModel>
+                <mat-error>Last Name Must not be Blank</mat-error>
+                <mat-icon matSuffix>last</mat-icon>
+                <mat-hint>Your Qualified Last Name</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="mx-auto">
+                <mat-label>Enter Phone Number</mat-label>
+                <input matInput placeholder="Placeholder" required type="tel" name="phn" #phn="ngModel" ngModel pattern="[789][0-9]{9}">
+                <mat-error>Must be a  proper Phone Number</mat-error>
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint>your available phone number</mat-hint>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="fill">
+                <mat-label>Select Store</mat-label>
+                <mat-select name="store" ngModel #store = "ngModel">
+                  <mat-option value="Fresh Mart">Fresh Mart</mat-option>
+                  <mat-option value="Insta Food Mart">Insta Food Mart</mat-option>
+                  <mat-option value="Divya Mart">Divya Mart</mat-option>
+                </mat-select>
+                <mat-error>Select Properly</mat-error>
+                <mat-icon matSuffix>store</mat-icon>
+                <mat-hint>Store You want to be connected with</mat-hint>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="fill" class="mx-auto">
+                <mat-label>Enter Your Address</mat-label>
+                <input matInput placeholder="Placeholder" name="address" #address="ngModel" ngModel>
+                <mat-error>Error</mat-error>
+                <mat-icon matSuffix>map</mat-icon>
+                <mat-hint>Need not to be exact</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="mx-auto">
+                <mat-label>Comments</mat-label>
+                <textarea matInput placeholder="Placeholder"></textarea>
+                <mat-error>Error</mat-error>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Feel Free to give any comments</mat-hint>
+              </mat-form-field><br>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModalCenter" [disabled]="!frm.valid" class="btn btn-outline-success mx-1 my-2">Submit</button>
+            </form>
+            </div>
+            </div>
+
+        <div class="col-md-8">
+            <img style="height: 70%;" src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Your Entered Data</h5>
+      </div>
+      <div class="modal-body">
+        Name:<span class="text-success">{{getForm()?.firstname}} {{getForm()?.lastname}}</span><br>
+        Phn Number:<span class="text-primary">{{getForm()?.phn}}</span><br>
+        Address:<span class="text-success">{{getForm()?.address}}</span><br>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" (click)="mdlClose()" data-bs-dismiss="modal">Confirm and Submit</button>
+        </div>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+</div>
+

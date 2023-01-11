@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { AppSharedModule } from './Modules/app-shared/app-shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -26,7 +28,9 @@ import { AccessDeniedComponent } from './Components/access-denied/access-denied.
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MaterialModuleModule
+    MaterialModuleModule,
+    AppSharedModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
