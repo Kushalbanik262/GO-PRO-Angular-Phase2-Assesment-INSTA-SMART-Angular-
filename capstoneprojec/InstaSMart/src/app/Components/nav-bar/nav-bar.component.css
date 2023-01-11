@@ -1,0 +1,7 @@
+span{
+    box-shadow: 0px 0px 8px 2px white;
+}
+
+li span{
+    box-shadow: 0px 0px 8px 2px greenyellow;
+}
