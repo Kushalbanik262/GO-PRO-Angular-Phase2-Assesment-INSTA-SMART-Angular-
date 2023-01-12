@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from './User.service';
 import { Injectable } from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import { flip } from '@popperjs/core';
-import { MatSnackBar, _SnackBarContainer } from '@angular/material/snack-bar';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable(
   {providedIn:"root"}

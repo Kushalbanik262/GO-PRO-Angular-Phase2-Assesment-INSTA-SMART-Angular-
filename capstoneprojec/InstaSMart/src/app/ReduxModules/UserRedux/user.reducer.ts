@@ -1,5 +1,5 @@
 import { UserLoading, UserLoadingSuccess, UserLoadingFailiure } from './user.actions';
-import { createReducer, on } from '@ngrx/store/src';
+import { createReducer, on } from '@ngrx/store';
 import { Users } from './../../Entities/users';
 export interface UserState{
   users:Users[],

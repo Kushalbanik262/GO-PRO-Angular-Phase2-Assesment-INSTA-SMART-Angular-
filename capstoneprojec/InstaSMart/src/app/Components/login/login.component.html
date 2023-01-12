@@ -3,28 +3,33 @@
     <mat-card-header class="mx-auto">
       <mat-card-title class="text-center">Login</mat-card-title>
     </mat-card-header>
-    <form class="example-form" #frm="ngForm" (ngSubmit)="tryLogin(frm.value)">
+    <form class="form" #frm="ngForm" (ngSubmit)="tryLogin(frm.value)">
     <mat-card-content>
-        <table class="example-full-width" cellspacing="0">
+        <table cellspacing="0">
           <tr>
             <td>
-              <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username"  name="username" required name="username" ngModel>
+              <mat-form-field appearance="fill">
+              <mat-label>Enter UserName</mat-label>
+              <input matInput  name="username" required name="username" ngModel>
+              <mat-error>Must Have a UserName</mat-error>
               <mat-icon matSuffix>person</mat-icon>
               </mat-form-field>
             </td>
           </tr>
           <tr>
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" type="password" name="password" required name="password" ngModel>
+          <td><mat-form-field appearance="fill">
+            <mat-label>Enter Password</mat-label>
+            <input matInput type="password" name="password" required name="password" ngModel>
+            <mat-error>Must have a password</mat-error>
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field></td>
         </tr></table>
       <mat-spinner [style.display]="loginFlag ? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="submit"  color="primary">Login</button>
+      <button [disabled]="!frm.valid" mat-raised-button type="submit"  color="primary">Login</button>
     </mat-card-actions>
   </form>
   </mat-card>
 </div>
+
