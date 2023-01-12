@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/Services/Login.service';
+import { UserService } from 'src/app/Services/User.service';
+
+
+interface credentials{
+  username:string,
+  password:string
+}
+
+
 
 @Component({
   selector: 'app-login',
@@ -7,9 +17,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginFlag:boolean = false;
+  constructor(private service:LoginService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+
+  tryLogin(data:credentials){
+    this.loginFlag = true;
+    this.service.login(data.username,data.password);
   }
 
 }

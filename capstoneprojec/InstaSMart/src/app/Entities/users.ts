@@ -6,6 +6,11 @@ export interface DebitCard{
     cvv:string
 }
 
+export enum UserPriviledges{
+  ADMIN,
+  USER
+}
+
 
 export interface Users{
     id:number,
@@ -14,5 +19,8 @@ export interface Users{
     contact:string,
     buy:Products[],
     card:DebitCard[],
-    locked:boolean
+    locked:boolean,
+    username:string,
+    password:string,
+    priviledge:UserPriviledges
 }

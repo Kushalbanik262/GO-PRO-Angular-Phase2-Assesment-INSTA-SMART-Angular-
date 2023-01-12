@@ -5,6 +5,10 @@ import { AboutUSComponent } from './Components/about-us/about-us.component';
 
 const routes: Routes = [
   {
+    path:"",
+    loadChildren:()=>import("../app/Modules/products/products.module").then(x=>x.ProductsModule)
+  },
+  {
     path:"contactUs",
     component:ContactUsComponent
   },
@@ -12,9 +16,10 @@ const routes: Routes = [
     path:"aboutUs",
     component:AboutUSComponent
   },
+
   {
-    path:"",
-    loadChildren:()=>import("../app/Modules/products/products.module").then(x=>x.ProductsModule)
+    path:"login",
+    loadChildren:()=>import("../app/Modules/auth-security/auth-security.module").then(x=>x.AuthSecurityModule)
   }
 ];
 
