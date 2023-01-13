@@ -1,24 +1,96 @@
-<div class="container-fluid my-2">
-    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="1000">
-            <div class="bg-light" style="width: 100%;">
-            <img src="https://www.seacoasteatlocal.org/wp-content/uploads/2015/03/veggis.png" style="height: 200px; width: 60%;" class="d-block mx-auto rounded" alt="..." >
-           </div>
-        </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <div class="bg-light" style="width: 100%;">
-                <img src="https://annetravelfoodie.com/wp-content/uploads/2017/02/Vegetable.jpg" style="height: 200px; width: 60%;" class="d-block mx-auto rounded" alt="..." >
-               </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bg-secondary rounded" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-          <span class="carousel-control-next-icon bg-secondary rounded" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+<div class="container-fluid" *ngIf="isLoggedin()">
+  <div class="navbar navbar-expand navbar-light bg-primary rounded">
+    <div class="navbar-brand p-2">
+      <app-star [star] = "star" *ngIf="!isAdmin()"></app-star>
+      <div class="bg-danger text-light p-3 border border-light rounded-2" id="admin" *ngIf="isAdmin()">Admin</div>
+    </div>
+    <div class="container">
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-danger" *ngIf="isAdmin()"><mat-icon matPrefix color="danger">dashboard</mat-icon>Your DashBoard</a>
+            <a class="nav-link text-light" *ngIf="!isAdmin()"><mat-icon matPrefix>grade</mat-icon>Offers For You  </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" > <mat-icon matPrefix>library_add</mat-icon>See By category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light">
+              <mat-icon matPrefix>local_offer</mat-icon>Sales Of the Day
+            </a>
+          </li>
+        </ul>
+      <div class="d-flex justify-content-center">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <mat-label class="text-light">Search Product By</mat-label>
+            <div class="input-group">
+              <select class="form-select-sm" [(ngModel)]="searchOption">
+                <option class="form-option" value="name">Name</option>
+                <option class="form-option" value="category">Category</option>
+                <option class="form-option" value="price">price</option>
+              </select>
+              <input type="text" (input)="search()" class="form-control" [placeholder]="searchText" [(ngModel)]="searchKey"/>
+              <button class="btn btn-success">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </li>
+        </ul>
       </div>
+      <div class="mx-7">
+        <div class="mx-auto">
+          <button mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
+            Cart <mat-icon matSuffix>shopping_cart</mat-icon>
+        </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+<div class="display-3 text-center">Today's Sales Are Live Now!!!</div>
+<app-sales-oftd></app-sales-oftd>
+
+<div class="container-fluid p-2 my-4">
+  <div class="text-center display-6 my-2">Check Our Exiting Products <mat-icon>business</mat-icon></div>
+    <div class="row">
+      <div class="col-md-2 p-2 border border-secondary" style="height: 200px;">
+
+      </div>
+      <div class="col-md-10">
+        <div class="row row-cols-3">
+          <div style="width: 100%;height: 100%;" class="shadow shadow-lg d-flex justify-content-center" *ngIf="!loaded">
+            <mat-spinner></mat-spinner>
+          </div>
+            <div class="col-md-auto" *ngFor="let item of fProductArr">
+                <mat-card style="width:20rem" class="shadow shadow-lg my-2" *ngIf="loaded">
+                  <mat-card-header>
+                    <mat-card-title>{{item.name}}</mat-card-title>
+                    <mat-card-subtitle>{{getCategory(item.category)}}</mat-card-subtitle>
+                    <img mat-card-image [src]="item.image[0]" alt="Photo of a product" style="width: 200px;height: 20rem;">
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="card-text">{{item.details}}</div>
+                     <div class="card-subtitle my-2"><span style="font-weight: bold;">Price:</span> {{item.price | currency : "INR"}}</div>
+                     <mark>
+                     <div class="d-inline-flex"> Ratings: <app-star [star]="item.ratings"></app-star> </div>
+                     </mark>
+                    </mat-card-content>
+                  <mat-card-actions>
+                    <mat-card-actions>
+                      <button *ngIf="!isAdmin() && isLoggedin()"  color ="success" mat-raised-button class="mx-1">Add<mat-icon>add_shopping_cart</mat-icon></button>
+                      <button (click)="explore(item)" color="primary" mat-raised-button class="mx-1">Explore<mat-icon>explore</mat-icon></button>
+                      <button *ngIf="isAdmin()" (click)="delete(item)" color="warning" mat-raised-button class="mx-1">Delete<mat-icon>delete_forever</mat-icon></button>
+                    </mat-card-actions>
+                  </mat-card-actions>
+                  <mat-card-footer>
+
+                  </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
 </div>

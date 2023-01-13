@@ -1,1 +1,80 @@
-<p>spec-prod works!</p>
+<app-helper-nav></app-helper-nav>
+<div class="display-3 text-center text-success my-2">
+  You will simply Like This
+  <h2 class="text-primary">You Are Looking From {{getCategory()}} Category</h2>
+</div>
+ <div class="container my-4 mx-5">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-card>
+              <img style="height: 200px; width: 90%;" [src]="current!.image[0]">
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+          <mat-card>
+            <img style="height: 200px; width: 90%;" [src]="current!.image[1]">
+          </mat-card>
+        </div>
+        <div class="col-md-4">
+          <mat-card>
+            <img style="height: 200px; width: 90%;" [src]="current!.image[2]">
+          </mat-card>
+        </div>
+    </div>
+    <div class="row my-4 shadow shadow-lg p-3">
+      <div class="col-md-6">
+          <mat-card-title>Product Description</mat-card-title>
+          <fieldset class="border border-primary p-4 rounded-2">
+            <legend class="w-auto">{{current.name}}</legend>
+            <div class="m-2 text-success">{{current.details}}</div>
+            <mark>Ratings: <app-star [star]="current.ratings"></app-star></mark>
+            <div class="p-2 mx-2 my-1 shadow shadow-sm">
+              <span class="bg-primary rounded-circle text-light mx-1 p-2 ">FeedBack From Influencer:  </span> <span style="font-weight: bold;">{{current.feedback}}</span>
+            </div>
+          </fieldset>
+      </div>
+      <div class="col-md-6">
+          <mat-card>
+            <mat-card-header>Price Calculation</mat-card-header>
+            <mat-card-content>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>GST:</td>
+                    <td>18%</td>
+                  </tr>
+                  <tr>
+                    <td>SST%</td>
+                    <td>0.5%</td>
+                  </tr>
+                  <tr>
+                    <td>Delivery</td>
+                    <td>40/-</td>
+                  </tr>
+                  <tr>
+                    <td>Total Price</td>
+                    <td>{{current!.price | currency : "INR"}}
+                      <mat-icon matIconSuffix>account_balance_wallet</mat-icon>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button>Contact Seller</button>
+              <button mat-raised-button color="success" *ngIf="isLoggedIn() && !isAdmin()">Add To Cart <mat-icon>add_shopping_cart</mat-icon></button>
+            </mat-card-actions>
+          </mat-card>
+      </div>
+    </div>
+    <div class="display-6 my-2" *ngIf="current.reviews.length > 0">Some Reviews From Buyers</div>
+    <div class="row row-cols-auto my-1">
+        <div class="col-md-auto m-md-2" *ngFor="let item of current.reviews">
+          <mat-card>
+            <mat-card-header>Ravi Rajesh</mat-card-header>
+            <img matCardImageMedium  [src]="item.image" class="mx-auto" style="width: 100%;">
+            <mat-card-content>{{item.content}}</mat-card-content>
+          </mat-card>
+        </div>
+    </div>
+</div>

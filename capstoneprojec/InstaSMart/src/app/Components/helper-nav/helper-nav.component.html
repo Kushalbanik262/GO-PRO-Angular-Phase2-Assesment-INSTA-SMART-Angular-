@@ -1,0 +1,34 @@
+<div class="container-fluid" *ngIf="isLoggedin()">
+  <div class="navbar navbar-expand navbar-light bg-primary rounded">
+    <div class="navbar-brand">
+      <app-star [star] = "star"></app-star>
+    </div>
+    <div class="container">
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-light"><mat-icon matPrefix>grade</mat-icon>Offers For You  </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light"> <mat-icon matPrefix>library_add</mat-icon>See By category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light">
+              <mat-icon matPrefix>local_offer</mat-icon>Sales Of the Day
+            </a>
+          </li>
+        </ul>
+      <div class="d-flex justify-content-center">
+        <ul class="navbar-nav">
+        </ul>
+      </div>
+      <div class="mx-7">
+        <div class="mx-auto">
+          <button mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
+            Cart <mat-icon matSuffix>shopping_cart</mat-icon>
+        </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

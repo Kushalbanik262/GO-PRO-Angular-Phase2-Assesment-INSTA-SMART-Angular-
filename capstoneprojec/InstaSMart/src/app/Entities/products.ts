@@ -21,7 +21,7 @@ export interface Products{
     details:string,
     price:number,
     ratings:number,
-    image:string,
+    image:string[],
     feedback:string,
     reviews:Reviews[]
 }

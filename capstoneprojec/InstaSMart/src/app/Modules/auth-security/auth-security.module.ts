@@ -1,3 +1,4 @@
+import { AppSharedModule } from './../app-shared/app-shared.module';
 import { UserEffects } from './../../ReduxModules/UserRedux/user.effects';
 
 import { UserReducer } from './../../ReduxModules/UserRedux/user.reducer';
@@ -29,7 +30,8 @@ import { EffectsModule } from '@ngrx/effects';
     MaterialModuleModule,
     FormsModule,
     StoreModule.forFeature("users",UserReducer),
-    EffectsModule.forFeature([UserEffects])
+    EffectsModule.forFeature([UserEffects]),
+    AppSharedModule
 
   ]
 })

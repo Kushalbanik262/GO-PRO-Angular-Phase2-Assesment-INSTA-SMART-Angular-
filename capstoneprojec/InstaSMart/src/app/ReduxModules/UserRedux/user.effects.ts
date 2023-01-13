@@ -13,6 +13,18 @@ import { mergeMap } from 'rxjs';
 export class UserEffects{
   constructor(private service:UserService,private actions$:Actions){}
 
+  loadUsers$ = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(UserLoading),
+      mergeMap(()=>
+        this.service.getAllUsers().pipe(
+          tap((data)=>{console.warn(data);}),
+          map((users)=>UserLoadingSuccess({users})),
+          catchError((error)=>of(UserLoadingFailiure({error})))
+        )
+      )
+    );
+  });
 
 
 }

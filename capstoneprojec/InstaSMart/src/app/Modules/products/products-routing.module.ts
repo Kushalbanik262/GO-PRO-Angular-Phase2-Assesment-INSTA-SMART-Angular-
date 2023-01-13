@@ -1,3 +1,4 @@
+import { SpecProdComponent } from './../../Components/spec-prod/spec-prod.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/app/Components/home/home.component';
@@ -6,6 +7,10 @@ const routes: Routes = [
   {
     path:"",
     component:HomeComponent
+  },
+  {
+    path:"product_details/:id",
+    component:SpecProdComponent
   }
 ];
 

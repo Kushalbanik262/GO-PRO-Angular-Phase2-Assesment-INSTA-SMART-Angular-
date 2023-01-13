@@ -36,19 +36,19 @@
       </div>
 
       <div class="navbar-collapse d-flex justify-content-end">
-           <li class="nav-item">
+           <li class="nav-item" *ngIf="isLoggedIn()">
             <span class="badge badge-primary text-light" style="font-size: 17px"
-            >Kushal <mat-icon matSuffix>person</mat-icon>
+            >{{getName() | uppercase}}<mat-icon matSuffix>person</mat-icon>
           </span>
            </li>
-           <li class="mx-2 nav-item">
-            <button class="btn btn-success p-2" [routerLink]="['login']">
+           <li class="mx-2 nav-item" *ngIf="!isLoggedIn()">
+            <button class="btn btn-success p-2" [routerLink]="['login']" >
                 login
                 <mat-icon>login</mat-icon>
             </button>
            </li>
-           <li>
-            <button class="btn btn-danger p-2">
+           <li *ngIf="isLoggedIn()">
+            <button class="btn btn-danger p-2" (click)="logout()">
                 logout
                 <mat-icon>logout</mat-icon>
             </button>

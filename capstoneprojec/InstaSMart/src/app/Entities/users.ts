@@ -7,8 +7,8 @@ export interface DebitCard{
 }
 
 export enum UserPriviledges{
-  ADMIN,
-  USER
+  ADMIN = "ADMIN",
+  USER = "USER"
 }
 
 

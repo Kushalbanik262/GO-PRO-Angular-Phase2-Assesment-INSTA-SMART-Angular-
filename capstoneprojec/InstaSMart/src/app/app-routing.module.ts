@@ -8,6 +8,7 @@ const routes: Routes = [
     path:"",
     loadChildren:()=>import("../app/Modules/products/products.module").then(x=>x.ProductsModule)
   },
+
   {
     path:"contactUs",
     component:ContactUsComponent
