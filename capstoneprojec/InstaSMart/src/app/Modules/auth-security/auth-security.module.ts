@@ -2,7 +2,7 @@ import { AppSharedModule } from './../app-shared/app-shared.module';
 import { UserEffects } from './../../ReduxModules/UserRedux/user.effects';
 
 import { UserReducer } from './../../ReduxModules/UserRedux/user.reducer';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModuleModule } from './../material-module/material-module.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -31,7 +31,8 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     StoreModule.forFeature("users",UserReducer),
     EffectsModule.forFeature([UserEffects]),
-    AppSharedModule
+    AppSharedModule,
+    ReactiveFormsModule
 
   ]
 })

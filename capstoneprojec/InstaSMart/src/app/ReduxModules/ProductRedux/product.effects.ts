@@ -2,7 +2,7 @@ import { SelectAllProducts } from './product.selector';
 import { from, of, switchMap, withLatestFrom } from 'rxjs';
 import { tap, map, catchError } from 'rxjs';
 import { mergeMap } from 'rxjs';
-import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave } from './product.actions';
+import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave, ProductDelete } from './product.actions';
 import { ofType } from '@ngrx/effects';
 import { createEffect } from '@ngrx/effects';
 import { ProductState } from './product.reducer';
@@ -49,7 +49,7 @@ export class ProductEffects{
 
   deleteProduct$ = createEffect(()=>
   this.action$.pipe(
-    ofType(ProductSave),
+    ofType(ProductDelete),
     tap((data)=>{console.log("Deleting Product In Product Create Effect",data)}),
     withLatestFrom(this.store.select(SelectAllProducts)),
     switchMap(([action,products]) => from(this.service.deleteProduct(products[0].id)))

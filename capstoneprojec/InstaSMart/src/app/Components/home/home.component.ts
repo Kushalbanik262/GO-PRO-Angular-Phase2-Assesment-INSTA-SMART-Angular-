@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   constructor(private router:Router,private Lservice:LoginService,private Pservice:ProductService,private store:Store<any>,private snack:MatSnackBar){}
   ngOnDestroy(): void {
+    console.warn("Unsubscribing From Home");
     this.subscribe.unsubscribe();
   }
 

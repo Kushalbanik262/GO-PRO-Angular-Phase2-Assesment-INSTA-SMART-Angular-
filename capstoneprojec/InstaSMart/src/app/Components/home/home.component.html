@@ -8,7 +8,7 @@
 
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link text-danger" *ngIf="isAdmin()"><mat-icon matPrefix color="danger">dashboard</mat-icon>Your DashBoard</a>
+            <a [routerLink]="['admin']" class="nav-link text-danger" *ngIf="isAdmin()"><mat-icon matPrefix color="danger">dashboard</mat-icon>Your DashBoard</a>
             <a class="nav-link text-light" *ngIf="!isAdmin()"><mat-icon matPrefix>grade</mat-icon>Offers For You  </a>
           </li>
           <li class="nav-item">
@@ -25,10 +25,10 @@
           <li class="nav-item">
             <mat-label class="text-light">Search Product By</mat-label>
             <div class="input-group">
-              <select class="form-select-sm" [(ngModel)]="searchOption">
-                <option class="form-option" value="name">Name</option>
-                <option class="form-option" value="category">Category</option>
-                <option class="form-option" value="price">price</option>
+              <select class="form-select" [(ngModel)]="searchOption" >
+                <option  value="name">Name</option>
+                <option  value="category">Category</option>
+                <option  value="price">price</option>
               </select>
               <input type="text" (input)="search()" class="form-control" [placeholder]="searchText" [(ngModel)]="searchKey"/>
               <button class="btn btn-success">

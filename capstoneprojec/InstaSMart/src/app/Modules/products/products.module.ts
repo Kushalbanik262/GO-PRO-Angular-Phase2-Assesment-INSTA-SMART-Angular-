@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductEffects } from './../../ReduxModules/ProductRedux/product.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductReducer } from './../../ReduxModules/ProductRedux/product.reducer';
@@ -36,7 +36,8 @@ import { AppSharedModule } from '../app-shared/app-shared.module';
     FormsModule,
     StoreModule.forFeature("products",ProductReducer),
     EffectsModule.forFeature([ProductEffects]),
-    AppSharedModule
+    AppSharedModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductsModule { }
