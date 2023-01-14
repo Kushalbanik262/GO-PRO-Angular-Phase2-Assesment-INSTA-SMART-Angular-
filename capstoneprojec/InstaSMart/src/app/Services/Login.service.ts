@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 )
 export class LoginService{
   isLoggedIn:boolean;
-  private currentUser!:Users;
+  currentUser!:Users;
   subscribe!:Subscription;
 
 
@@ -21,6 +21,9 @@ export class LoginService{
     this.isLoggedIn = false;
   }
 
+  getId(){
+    return this.currentUser.id;
+  }
 
 
   getName(){

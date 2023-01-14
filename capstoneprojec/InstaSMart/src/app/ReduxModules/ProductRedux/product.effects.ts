@@ -1,8 +1,8 @@
 import { SelectAllProducts } from './product.selector';
-import { from, of, switchMap, withLatestFrom } from 'rxjs';
+import { from, of, switchMap, withLatestFrom , concatMap } from 'rxjs';
 import { tap, map, catchError } from 'rxjs';
 import { mergeMap } from 'rxjs';
-import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave, ProductDelete } from './product.actions';
+import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave, ProductDelete, ProductUpdate, ProductUpdateSuccess, ProductUpdateFailed } from './product.actions';
 import { ofType } from '@ngrx/effects';
 import { createEffect } from '@ngrx/effects';
 import { ProductState } from './product.reducer';
@@ -39,9 +39,12 @@ export class ProductEffects{
   saveProducts$ = createEffect(()=>
     this.action$.pipe(
       ofType(ProductSave),
-      tap((data)=>{console.log("Trying to save Product In Product Create Effect",data)}),
-      withLatestFrom(this.store.select(SelectAllProducts)),
-      switchMap(([action,products]) => from(this.service.saveProduct(products[0])))
+      concatMap(action=>
+        this.service.saveProduct(action.product)
+        .pipe(
+          map(product=>ProductSave({product}))
+        )
+      )
     ),
     {dispatch:false}
   );
@@ -50,11 +53,28 @@ export class ProductEffects{
   deleteProduct$ = createEffect(()=>
   this.action$.pipe(
     ofType(ProductDelete),
-    tap((data)=>{console.log("Deleting Product In Product Create Effect",data)}),
-    withLatestFrom(this.store.select(SelectAllProducts)),
-    switchMap(([action,products]) => from(this.service.deleteProduct(products[0].id)))
+    concatMap(action=>
+      this.service.deleteProduct(action.pid)
+      .pipe(
+        map(()=>ProductDelete({pid:action.pid}))
+      )
+    )
   ),
   {dispatch:false}
 );
+
+
+  updateProduct$ = createEffect(()=>{
+    return this.action$.pipe(
+      ofType(ProductUpdate),
+      concatMap(action=>
+        this.service.updateProduct(action.product)
+        .pipe(
+          map(product=>ProductUpdateSuccess({product})),
+          catchError(error=>of(ProductUpdateFailed(error)))
+        )
+      )
+    );
+  });
 
 }

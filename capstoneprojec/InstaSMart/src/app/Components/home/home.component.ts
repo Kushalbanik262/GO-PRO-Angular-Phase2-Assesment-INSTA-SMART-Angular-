@@ -1,3 +1,5 @@
+import { CartLoading } from './../../ReduxModules/CartRedux/cart.actions';
+import { CartService } from './../../Services/Cart.service';
 import { UserPriviledges } from './../../Entities/users';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,6 +11,7 @@ import { ProductService } from './../../Services/Products.service';
 import { LoginService } from './../../Services/Login.service';
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Cart } from 'src/app/Entities/cart';
 
 
 
@@ -26,16 +29,26 @@ export class HomeComponent implements OnInit,OnDestroy {
   searchOption:string = ""; //Searching Options
   searchKey:string = "";//The Key Of searching using the both Way Binding
   loaded:boolean = false; //Loader state
-
   subscribe!:Subscription;
 
 
-  constructor(private router:Router,private Lservice:LoginService,private Pservice:ProductService,private store:Store<any>,private snack:MatSnackBar){}
+  constructor(
+    private router:Router,
+    private Lservice:LoginService,
+    private Pservice:ProductService,
+    private store:Store<any>,
+    private snack:MatSnackBar,
+    private Cservice:CartService,
+    ){}
+
   ngOnDestroy(): void {
     console.warn("Unsubscribing From Home");
     this.subscribe.unsubscribe();
   }
 
+  getLoginId(){
+    return this.Lservice.currentUser.id;
+  }
 
   getPriviledge(){
     return this.Lservice.getPriviledge();
@@ -83,6 +96,11 @@ export class HomeComponent implements OnInit,OnDestroy {
     return productCat[data];
   }
   ngOnInit(): void {
+
+    if(this.Lservice.isLoggedIn){
+      this.Cservice.setCurrentCart(this.Lservice.getId());
+    }
+
     this.searchText = `Search Your way ${this.Lservice.getName()}!`;
     this.store.dispatch(ProductLoad()); //Loading The product On Init
     this.subscribe = this.store.subscribe((response)=>{ // And Subscribing it
@@ -90,7 +108,8 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.productsArr = response.products.products;
       this.fProductArr = response.products.products;
       if(this.productsArr.length > 0){this.loaded = true;}
-    })
+    });
+
   }
 
 

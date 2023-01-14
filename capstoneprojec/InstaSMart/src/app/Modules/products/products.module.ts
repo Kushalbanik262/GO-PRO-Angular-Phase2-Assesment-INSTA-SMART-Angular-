@@ -1,3 +1,4 @@
+import { cartReducer } from './../../ReduxModules/CartRedux/cart.reducer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductEffects } from './../../ReduxModules/ProductRedux/product.effects';
 import { EffectsModule } from '@ngrx/effects';
@@ -16,6 +17,7 @@ import { CUProductsComponent } from '../../Components/cuproducts/cuproducts.comp
 import { SalesOFTDComponent } from '../../Components/sales-oftd/sales-oftd.component';
 import { MaterialModuleModule } from '../material-module/material-module.module';
 import { AppSharedModule } from '../app-shared/app-shared.module';
+import { CartEffects } from 'src/app/ReduxModules/CartRedux/cart.effects';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { AppSharedModule } from '../app-shared/app-shared.module';
     HttpClientModule,
     FormsModule,
     StoreModule.forFeature("products",ProductReducer),
-    EffectsModule.forFeature([ProductEffects]),
+    StoreModule.forFeature("carts",cartReducer),
+    EffectsModule.forFeature([ProductEffects,CartEffects]),
     AppSharedModule,
     ReactiveFormsModule
   ]

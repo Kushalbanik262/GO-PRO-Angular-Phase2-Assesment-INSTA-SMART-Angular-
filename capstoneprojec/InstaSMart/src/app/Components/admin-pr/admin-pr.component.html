@@ -36,7 +36,7 @@
             Must Have a proper Id
           </div>
           <label for="Id" class="form-label">Enter Product Id*</label>
-          <input type="text" [disabled]="isEdit"  class="form-control mb-1" id="id" name="id" formControlName="id">
+          <input type="text"  class="form-control mb-1" id="id" name="id" formControlName="id">
 
           <div *ngIf="!nameValidity() && (this.frm?.get('name')?.dirty || this.frm?.get('name')?.touched)" class="alert alert-warning text-center">
             Product Name is not Valid

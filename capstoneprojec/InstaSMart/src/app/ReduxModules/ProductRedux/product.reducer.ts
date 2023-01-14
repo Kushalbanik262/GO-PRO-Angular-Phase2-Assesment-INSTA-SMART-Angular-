@@ -1,4 +1,4 @@
-import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave, ProductDelete } from './product.actions';
+import { ProductLoad, ProductLoadingSuccess, ProductLoadingFailed, ProductSave, ProductDelete, ProductUpdateSuccess, ProductUpdateFailed } from './product.actions';
 import { createReducer, on } from '@ngrx/store';
 import { Products } from './../../Entities/products';
 
@@ -35,6 +35,7 @@ on(ProductLoad,(state)=>({
   isLoaded:false,
   updated:getCurrentTime()
 })),
+
 on(ProductLoadingSuccess,(state,action)=>({
   ...state,
   products:action.products,
@@ -50,7 +51,7 @@ on(ProductLoadingFailed,(state,action)=>({
 
 on(ProductSave,(state,action)=>({
   ...state,
-  products:[action.product,...state.products],
+  products:[...state.products,action.product],
   isLoaded:true,
   isLoading:false,
   updated:getCurrentTime()
@@ -58,10 +59,25 @@ on(ProductSave,(state,action)=>({
 
 on(ProductDelete,(state,action)=>({
   ...state,
-  products:state.products.filter(x=>x.id!=action.pid),
+  products:state.products.filter(x=>x.id!==action.pid),
   isLoaded:true,
   isLoading:false,
   updated:getCurrentTime()
+})),
+
+on(ProductUpdateSuccess,(state,action)=>({
+  ...state,
+  products:state.products.map(p=> (p?.id == action.product?.id ? action.product : p)),
+  isLoaded:true,
+  isLoading:false,
+  updated:getCurrentTime()
+})),
+
+on(ProductUpdateFailed,(state,action)=>({
+  ...state,
+  products:[],
+  isLoaded:false,
+  isLoading:false
 }))
 
 

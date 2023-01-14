@@ -42,4 +42,20 @@ export class ProductService{
       catchError(error=>{console.error(error);return of([])})
     );
   }
+
+
+  updateProduct(product:Products):Observable<Products>{
+    const headers = new HttpHeaders({'content-type':'application-json'});
+    const newProduct = {...product};
+    console.info(`The Updation Object: ${JSON.stringify(newProduct)}`);
+
+    return this.http.put<Products>(this.url,newProduct,{headers})
+    .pipe(
+        tap(data=>{
+            console.warn("Updated Data successfully From product Service",data);
+        }),
+        catchError(err => {
+            throw 'error Details: Coming From Product Service While Updating' + err;
+        }));
+  }
 }

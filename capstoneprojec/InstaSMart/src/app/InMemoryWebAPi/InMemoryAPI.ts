@@ -1,6 +1,7 @@
 import { Products, productCat } from './../Entities/products';
 import { UserPriviledges, Users } from './../Entities/users';
 import { InMemoryDbService } from "angular-in-memory-web-api";
+import { Cart } from '../Entities/cart';
 
 
 
@@ -94,9 +95,26 @@ export class InMemoryWebApi implements InMemoryDbService{
         ratings:3,
         reviews:[]
       }
-    ]
+    ];
 
-    return {users,products};
+
+    let cart:Cart[] =
+    [
+      {
+        id:101,
+        time:new Date().toLocaleTimeString(),
+        cartmap:[]
+      },
+      {
+
+        id:102,
+        time:new Date().toLocaleTimeString(),
+        cartmap:[]
+      }
+    ]
+    ;
+
+    return {users,products,cart};
   }
 
 }

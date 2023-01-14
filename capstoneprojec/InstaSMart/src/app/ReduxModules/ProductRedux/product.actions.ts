@@ -29,4 +29,28 @@ export const ProductSave = createAction(
 export const ProductDelete = createAction(
   "[Product] Deletion Success",
   props<{pid:number}>()
-)
+);
+
+
+export const ProductUpdate = createAction(
+  "[Product] Updation",
+  props<{product:Products}>()
+);
+
+
+export const ProductUpdateSuccess = createAction(
+  "[Product] Updation Success",
+  props<{product:Products}>()
+);
+
+
+export const ProductUpdateFailed = createAction(
+  "[Product] Updation Failed",
+  props<{error:string}>()
+);
+
+
+
+
+
+

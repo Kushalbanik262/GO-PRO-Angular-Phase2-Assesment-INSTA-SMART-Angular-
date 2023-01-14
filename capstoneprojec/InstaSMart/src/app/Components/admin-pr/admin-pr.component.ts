@@ -1,4 +1,5 @@
-import { ProductLoad, ProductSave } from './../../ReduxModules/ProductRedux/product.actions';
+import { ProductState } from './../../ReduxModules/ProductRedux/product.reducer';
+import { ProductLoad, ProductSave, ProductUpdate, ProductLoadingSuccess } from './../../ReduxModules/ProductRedux/product.actions';
 import { Products, productCat } from './../../Entities/products';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -38,15 +39,17 @@ export class AdminPRComponent implements OnInit {
 }}
 
   ngOnInit(): void {
-    this.store.dispatch(ProductLoad());
-    let subscription = this.store.subscribe(
-      {
-        next:(response)=>{
-          this.productsArr = response.products.products;
-          //if(this.productsArr.length > 0){subscription.unsubscribe();}
-        }
-      }
-    )
+    // this.store.dispatch(ProductLoad());
+    // let subscription = this.store.subscribe(
+    //   {
+    //     next:(response)=>{
+    //       this.productsArr = response.products.products;
+    //       //if(this.productsArr.length > 0){subscription.unsubscribe();}
+    //     }
+    //   }
+    // )
+    this.store.select(ProductLoadingSuccess).subscribe(
+      (response:any)=>{console.log(response.products.products);this.productsArr = response.products.products;})
   }
 
   getCategory(data:productCat){
@@ -66,13 +69,31 @@ export class AdminPRComponent implements OnInit {
   }
 
   submitData(){
+    let allDetails = this.getAllDetails();
+    let product:Products = {id:-1,category:productCat.Daily,details:"",feedback:"",image:[],name:"",price:-1,ratings:0,reviews:[]};
+    product.id = this.item.id;
+    product.ratings = this.item.ratings;
+    product.reviews = this.item.reviews;
 
-    if(this.isEdit){ //FOr Updation Part
-      //this.store.dispatch()
+    if(this.isEdit){ //For Updation Part Only Valid Changes are there
+      //this.frm.get("id")?.disable();
+      console.log("The Product TO be Edited",product);
+      product.name = (allDetails.cname === null ? "" : allDetails.cname);
+      product.category = (allDetails.category === null ? productCat.Daily : this.allProductCat.indexOf(allDetails.category));
+      product.details = (allDetails.details === null ? "" : allDetails.details);
+      product.feedback = (allDetails.feedback === null ? "" : allDetails.feedback);
+      product.image = [(allDetails.image === null ? "" : allDetails.image)];
+      product.price = (allDetails.price === null ? -1 : parseInt(allDetails.price));
+
+      this.store.dispatch(ProductUpdate({product})); //Dispatching the Updation
+      // let subscription =  this.store.subscribe(
+      //   {
+      //     next:(response)=>{console.log("The Response Coming From Product updation",response);subscription.unsubscribe();}
+      //   }
+      // );
     }
     else{
-      let allDetails = this.getAllDetails();
-      let product:Products = this.item;
+
 
       //Setting All The Values Of Product
       product.id = (allDetails.id === null ? -1 : parseInt(allDetails.id));
@@ -86,11 +107,11 @@ export class AdminPRComponent implements OnInit {
       product.reviews = [];
 
       this.store.dispatch(ProductSave({product}));
-      let subscription =  this.store.subscribe(
-        {
-          next:(response)=>{console.log("The Response Coming From Product Saving",response);subscription.unsubscribe();}
-        }
-      )
+      // let subscription =  this.store.subscribe(
+      //   {
+      //     next:(response)=>{console.log("The Response Coming From Product Saving",response);subscription.unsubscribe();}
+      //   }
+      // )
     }
   }
 
