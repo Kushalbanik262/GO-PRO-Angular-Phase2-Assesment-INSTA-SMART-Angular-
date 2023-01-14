@@ -97,9 +97,9 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
   ngOnInit(): void {
 
-    if(this.Lservice.isLoggedIn){
-      this.Cservice.setCurrentCart(this.Lservice.getId());
-    }
+    // if(this.Lservice.isLoggedIn){
+    //   this.Cservice.setCurrentCart(this.Lservice.getId());
+    // }
 
     this.searchText = `Search Your way ${this.Lservice.getName()}!`;
     this.store.dispatch(ProductLoad()); //Loading The product On Init
@@ -113,6 +113,10 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
 
+  addToCart(item:Products){
+    console.log("Trying To Add to Cart",item);
+    this.Cservice.addCurrentCart(item);
+  }
 
 
   explore(item:Products){

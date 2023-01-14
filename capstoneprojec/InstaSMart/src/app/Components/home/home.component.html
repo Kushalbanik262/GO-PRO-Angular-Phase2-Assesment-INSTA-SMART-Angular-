@@ -78,7 +78,7 @@
                     </mat-card-content>
                   <mat-card-actions>
                     <mat-card-actions>
-                      <button *ngIf="!isAdmin() && isLoggedin()"  color ="success" mat-raised-button class="mx-1">Add<mat-icon>add_shopping_cart</mat-icon></button>
+                      <button (click) = "addToCart(item)"  *ngIf="!isAdmin() && isLoggedin()"  color ="success" mat-raised-button class="mx-1">Add<mat-icon>add_shopping_cart</mat-icon></button>
                       <button (click)="explore(item)" color="primary" mat-raised-button class="mx-1">Explore<mat-icon>explore</mat-icon></button>
                       <button *ngIf="isAdmin()" (click)="delete(item)" color="warning" mat-raised-button class="mx-1">Delete<mat-icon>delete_forever</mat-icon></button>
                     </mat-card-actions>

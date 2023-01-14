@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, map } from 'rxjs';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs';
 import { tap } from 'rxjs';
@@ -54,6 +54,7 @@ export class ProductService{
         tap(data=>{
             console.warn("Updated Data successfully From product Service",data);
         }),
+        map(()=>product),
         catchError(err => {
             throw 'error Details: Coming From Product Service While Updating' + err;
         }));

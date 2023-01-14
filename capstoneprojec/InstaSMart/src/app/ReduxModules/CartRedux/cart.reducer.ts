@@ -1,4 +1,4 @@
-import { CartLoading, CartLoadingFail, CartUpdation, CartUpdationSuccess, CartUpdationFail, CartLoadingSuccessful } from './cart.actions';
+import { CartLoading, CartLoadingFail, CartUpdation, CartUpdationSuccess, CartUpdationFail, CartLoadingSuccessful, CartDeletion, CartSave } from './cart.actions';
 import { Cart } from './../../Entities/cart';
 import { createReducer, on } from '@ngrx/store';
 
@@ -55,7 +55,7 @@ on(CartLoadingFail,(state,action)=>({
 
 on(CartUpdationSuccess,(state,action)=>({
   ...state,
-  carts:state.carts.map(c=>(c.id == action.cart.id? action.cart : c)),
+  carts:state.carts.map(c=>(c.id == action.cart?.id? action.cart : c)),
   isLoading:false,
   isLoaded:true,
   updated:getCurrent()
@@ -65,7 +65,26 @@ on(CartUpdationFail,(state,action)=>({
   ...state,
   isLoaded:false,
   isLoading:false,
-  error:action.error
+  error:action.error,
+  updated:getCurrent()
+})),
+
+
+on(CartDeletion,(state,action)=>({
+  ...state,
+  carts:state.carts.filter(c=>c.id!=action.cartId),
+  isLoaded:true,
+  isLoading:false,
+  updated:getCurrent()
+})),
+
+
+on(CartSave,(state,action)=>({
+...state,
+carts:[action.cart,...state.carts],
+isLoaded:true,
+isLoading:false,
+updated:getCurrent()
 }))
 
 )

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CartState } from './cart.reducer';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { concatMap, of } from 'rxjs';
 import { tap, map, catchError } from 'rxjs';
 import { mergeMap } from 'rxjs';
-import { CartLoading, CartLoadingFail, CartLoadingSuccessful } from './cart.actions';
+import { CartDeletion, CartLoading, CartLoadingFail, CartLoadingSuccessful, CartSave, CartUpdation, CartUpdationFail, CartUpdationSuccess } from './cart.actions';
 import { ofType } from '@ngrx/effects';
 import { createEffect } from '@ngrx/effects';
 import { CartCrudService } from './../../Services/CartCrud.service';
@@ -30,4 +30,43 @@ export class CartEffects{
       )
     );
   });
+
+
+  cartAdd$ = createEffect(()=>
+    this.action$.pipe(
+      ofType(CartSave),
+      concatMap(action=>
+        this.service.saveCart(action.cart)
+        .pipe(
+          map(cart=>CartSave({cart}))
+        )
+      )
+    ),
+    {dispatch:false}
+  );
+
+  updateCart$ = createEffect(()=>{
+    return this.action$.pipe(
+      ofType(CartUpdation),
+      concatMap(action=>
+        this.service.updateCart(action.cart)
+        .pipe(
+          map(cart=>CartUpdationSuccess({cart})),
+          catchError(error=>of(CartUpdationFail(error)))
+        )
+      )
+    );
+  });
+
+  deleteCart$ = createEffect(()=>{
+    return this.action$.pipe(
+      ofType(CartDeletion),
+      concatMap(action=>
+        this.service.deleteCart(action.cartId).pipe(
+          map(()=>CartDeletion({cartId:action.cartId}))
+        )
+      )
+    );
+  });
+
 }

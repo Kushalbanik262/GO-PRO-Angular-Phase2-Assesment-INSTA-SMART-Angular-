@@ -14,7 +14,7 @@ export class InMemoryWebApi implements InMemoryDbService{
         name:"Kushal Banik",
         username:"kushal",
         password:"kushal1234",
-        priviledge:UserPriviledges.ADMIN,
+        priviledge:UserPriviledges.USER,
         address:"Khardah,Kolkata",
         contact:"kushalbanik93@gmail.com",
         buy:[],
@@ -98,21 +98,7 @@ export class InMemoryWebApi implements InMemoryDbService{
     ];
 
 
-    let cart:Cart[] =
-    [
-      {
-        id:101,
-        time:new Date().toLocaleTimeString(),
-        cartmap:[]
-      },
-      {
-
-        id:102,
-        time:new Date().toLocaleTimeString(),
-        cartmap:[]
-      }
-    ]
-    ;
+    let cart:Cart[] =[];
 
     return {users,products,cart};
   }

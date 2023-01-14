@@ -19,7 +19,8 @@ export const CartLoadingFail = createAction(
 );
 
 export const CartUpdation = createAction(
-  "[Cart] Updation"
+  "[Cart] Updation",
+  props<{cart:Cart}>()
 );
 
 
@@ -32,4 +33,16 @@ export const CartUpdationSuccess = createAction(
 export const CartUpdationFail = createAction(
   "[Cart] Updation Failed",
   props<{error:string}>()
+)
+
+
+export const CartDeletion = createAction(
+  "[Cart] Deletion SuccessFul",
+  props<{cartId:number}>()
+)
+
+
+export const CartSave = createAction(
+  "[Cart] Saving Successful",
+  props<{cart:Cart}>()
 )
