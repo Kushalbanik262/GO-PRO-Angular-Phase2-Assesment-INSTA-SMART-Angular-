@@ -32,7 +32,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -97,7 +97,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    MatDialogModule,
+    MatDialogModule
   ]
 })
 export class MaterialModuleModule { }

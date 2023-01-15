@@ -1,3 +1,5 @@
+import { CartSave } from './../../ReduxModules/CartRedux/cart.actions';
+import { CartService } from './../../Services/Cart.service';
 import { UserPriviledges } from './../../Entities/users';
 import { LoginService } from 'src/app/Services/Login.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +17,14 @@ import { Store } from '@ngrx/store';
 export class SpecProdComponent implements OnInit {
   id!:number;
   current!:Products;
-  constructor(private activate:ActivatedRoute,private store:Store<any>,private Lservice:LoginService) { }
+  cartCount:number = 0;
+  constructor(private activate:ActivatedRoute,private store:Store<any>,private Lservice:LoginService,private Cservice:CartService) { }
+
+  addProduct(){
+    this.cartCount = this.Cservice.allCarts.length;
+    this.Cservice.addCurrentCart(this.current);
+  }
+
 
 
   getPriviledge(){

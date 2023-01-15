@@ -1,3 +1,4 @@
+import { sales } from './../Entities/sales';
 import { Products, productCat } from './../Entities/products';
 import { UserPriviledges, Users } from './../Entities/users';
 import { InMemoryDbService } from "angular-in-memory-web-api";
@@ -19,11 +20,55 @@ export class InMemoryWebApi implements InMemoryDbService{
         contact:"kushalbanik93@gmail.com",
         buy:[],
         card:[{
-          id:147852,
+          id:102900147852,
           cvv:"078",
-          name:"Simpli Click"
+          name:"Simpli Click:State Bank Of India"
         }],
         locked:false
+      }
+    ];
+
+
+    let sales:sales[] = [
+      {
+        id:1,
+        category:"Winter Sale",
+        details:"All Electronics ",
+        image:"https://img.paisawapas.com/ovz3vew9pw/2017/07/26205443/AMAZON-DEAL-THUMBNAIL2.jpg",
+        name:"Mega Winter Off",
+        offer:"20% Off Over Headphones"
+      },
+      {
+        id:2,
+        category:"The Grand Gadget Sale",
+        details:"All Gadgets",
+        image:"https://pbs.twimg.com/media/ETZ7jT2XkAATR1m.jpg",
+        name:"Bonanza On New Gadgets",
+        offer:"30% CashBack"
+      },
+      {
+        id:3,
+        category:"Best Of Gadget",
+        details:"For All The Electronics & Gadgets",
+        image:"https://images.gizbot.com/fit-in/img/600x338/2021/03/amazon-best-tech-gadgets-2021-offer-on-laptops-gaming-devices-electronics-devices-1615363455.jpg",
+        name:"New Year Sales",
+        offer:"50% CashBack over SBI"
+      },
+      {
+        id:4,
+        category:"vegetable Sale",
+        details:"All Winter Vgetables",
+        image:"https://cdn2.vectorstock.com/i/1000x1000/88/16/discount-sale-poster-with-fresh-vegetable-vector-13778816.jpg",
+        name:"Yearly Mart Sale",
+        offer:"10 Coupons Free!"
+      },
+      {
+        id:5,
+        category:"Fruit Fanta",
+        details:"All Dry Fruits",
+        image:"https://thumbs.dreamstime.com/z/fruits-sale-shop-6621533.jpg",
+        name:"Foot Foodies Sale",
+        offer:"5% Off"
       }
     ];
 
@@ -59,7 +104,7 @@ export class InMemoryWebApi implements InMemoryDbService{
       {
         id:13,
         name:"Dolby Atmos Head Phone",
-        category:productCat.HouseHold,
+        category:productCat.Electronics,
         details:"This is The Headphone from SOat Company, with dolby Tech",
         price:2678,
         feedback:"Comes With crystal Clear sound and noise cancelation",
@@ -100,7 +145,7 @@ export class InMemoryWebApi implements InMemoryDbService{
 
     let cart:Cart[] =[];
 
-    return {users,products,cart};
+    return {users,products,cart,sales};
   }
 
 }

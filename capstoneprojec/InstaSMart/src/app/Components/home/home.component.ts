@@ -109,13 +109,17 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.fProductArr = response.products.products;
       if(this.productsArr.length > 0){this.loaded = true;}
     });
-
+    this.cartCount = this.Cservice.allCarts.length;
   }
 
+  routeCart(){
+    this.router.navigate(['showcart']);
+  }
 
   addToCart(item:Products){
     console.log("Trying To Add to Cart",item);
     this.Cservice.addCurrentCart(item);
+    this.cartCount = this.Cservice.allCarts.length;
   }
 
 

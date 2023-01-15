@@ -1,1 +1,28 @@
-<p>purcheses works!</p>
+<div class="display-3 text-center text-success">Your Purchased Items <mat-icon matSuffix>donut_large</mat-icon></div>
+<div class="container my-4 shadow shadow-lg">
+
+<div class="row shadow shadow-sm my-3 rounded p-3" *ngFor="let item of getAllPurchases().products">
+  <div class="col-md-1">
+    <span class="text-center my-auto">{{item.name}}</span>
+  </div>
+  <div class="col-md-3">
+    <img [src]="item.image[0]" alt="#" style="height: 200px; width: 50%;">
+  </div>
+  <div class="col-md-4">
+    <div class="my-auto">{{item.price | currency : "INR"}}</div>
+  </div>
+  <div class="col-md-4">
+    <span class="text-center mx-auto text-info">Updated On: <span class="text-warning">{{getAllPurchases().updated | uppercase}}
+      <mat-icon matPrefix>update</mat-icon>
+     </span>
+     </span>
+     <div class="bg-success my-2 text-light shadow shadow-sm rounded rounded-3 p-4">
+      Order Placed <mat-icon matSuffix>add_location</mat-icon>
+      In Transit <mat-icon matSuffix>track_changes</mat-icon></div>
+     <div class="container">
+      <mat-icon matPrefix>timeline</mat-icon>
+        <div>Expected Delivery:<span class="text-center text-info">02/02/2022</span></div>
+     </div>
+    </div>
+</div>
+</div>

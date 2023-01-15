@@ -1,3 +1,5 @@
+import { SalesEffect } from './../../ReduxModules/SalesRedux/sales.effects';
+import { SalesReducer } from '../../ReduxModules/SalesRedux/sales.reducer';
 import { cartReducer } from './../../ReduxModules/CartRedux/cart.reducer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductEffects } from './../../ReduxModules/ProductRedux/product.effects';
@@ -38,7 +40,8 @@ import { CartEffects } from 'src/app/ReduxModules/CartRedux/cart.effects';
     FormsModule,
     StoreModule.forFeature("products",ProductReducer),
     StoreModule.forFeature("carts",cartReducer),
-    EffectsModule.forFeature([ProductEffects,CartEffects]),
+    StoreModule.forFeature("sales",SalesReducer),
+    EffectsModule.forFeature([ProductEffects,CartEffects,SalesEffect]),
     AppSharedModule,
     ReactiveFormsModule
   ]

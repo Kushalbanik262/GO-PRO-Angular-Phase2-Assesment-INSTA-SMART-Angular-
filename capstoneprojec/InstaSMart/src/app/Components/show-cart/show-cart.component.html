@@ -1,1 +1,105 @@
-<p>show-cart works!</p>
+<app-helper-nav></app-helper-nav>
+<div class="my-1 text-center display-3">Welcome To Your Cart {{name}}</div>
+<div class="container-fluid my-4">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+      <div class="container-fluid">
+        <table class="table table-hover table-responsive p-2 shadow shadow-sm">
+          <thead class="shadow shadow-sm p-4">
+            <tr>
+              <td>Product Id</td>
+              <td>Product Name</td>
+              <td>Image</td>
+              <td>Product Price</td>
+              <td>Product Quantity</td>
+              <td>Manupulated</td>
+              <td colspan="4">Change</td>
+              <td>Total</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+          <tbody *ngIf="loader">
+            <tr *ngFor="let item of productMap" class="my-1">
+              <td>{{item.product.id}}</td>
+              <td>{{item.product.name}}</td>
+              <td>
+                <img [src]="item.product.image[0]" alt="Product Image" style="width: 70px; height: 70px;">
+              </td>
+              <td>{{item.product.price | currency:"INR"}}</td>
+              <td>{{item.quantity}}</td>
+              <td>{{item.updated}}</td>
+              <td colspan="4">
+                  <div class="p-2 mx-1">
+                  <button (click)="increase(item)" mat-raised-button class="p-1 my-1">+</button>
+                  <button (click)="decrease(item)" mat-raised-button class="p-1 my-1">-</button>
+                  </div>
+              </td>
+              <td>
+                {{getTotal(item) | currency:"INR"}}
+              </td>
+              <td>
+                <button (click)="remove(item)" class="btn btn-outline-danger rounded-circle">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="p-4 container-fluid" *ngIf="!loader">
+          <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <mat-card class="my-3">
+        <mat-card-header class="text-center">Price Calculation</mat-card-header>
+        <mat-card-content>
+            <table class="table">
+              <tbody>
+                <tr *ngFor="let item of productMap">
+                  <td>{{item.product.name}}</td>
+                  <td>{{item.product.price | currency :"INR"}}</td>
+                </tr>
+                <tr>
+                  <td>GST(18%)</td>
+                  <td>{{calculateGst()| currency : "INR"}}</td>
+                </tr>
+                <tr>
+                  <td>Delivery</td>
+                  <td>40/-</td>
+                </tr>
+                <tr>
+                  <td>Total Amount</td>
+                  <td>{{(total + calculateGst()) + 40 | currency : "INR"}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="mx-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="warn" >Checkout</button>
+        </mat-card-actions>
+        <mat-card-actions>
+          <button class="mx-auto" mat-raised-button color="primary" [routerLink]="['']" >Continue Shopping</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hi {{name}} Do you Wish to Checkout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Total Price: {{total | currency : "INR"}}</p>
+      </div>
+      <div class="modal-footer">
+        <button  mat-raised-button class="success" data-bs-dismiss="modal" (click)="checkout()">Procced For Payment</button>
+        <button  mat-raised-button class="warn" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

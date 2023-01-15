@@ -58,8 +58,10 @@ export class CartCrudService{
    }
 
    deleteCart(cid:number):Observable<{}>{
+    const headers = new HttpHeaders({'content-type':'application-json'});
+    console.log("Deleting Cart With Id:",cid);
     let durl = `${this.url}/${cid}`;
-    return this.http.delete(durl).pipe(
+    return this.http.delete(durl,{headers}).pipe(
       tap((data)=>{
         console.info(`Deleting Data: ${data}`);
     }),

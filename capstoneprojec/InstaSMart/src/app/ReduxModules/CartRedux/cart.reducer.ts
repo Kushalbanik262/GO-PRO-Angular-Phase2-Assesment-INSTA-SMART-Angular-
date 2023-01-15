@@ -72,7 +72,7 @@ on(CartUpdationFail,(state,action)=>({
 
 on(CartDeletion,(state,action)=>({
   ...state,
-  carts:state.carts.filter(c=>c.id!=action.cartId),
+  carts:state.carts.filter(c=>c.id !== action.cartId),
   isLoaded:true,
   isLoading:false,
   updated:getCurrent()

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { MaterialModuleModule } from './../material-module/material-module.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { HelperNavComponent } from '../../Components/helper-nav/helper-nav.compo
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModuleModule
+    MaterialModuleModule,
+    RouterModule
   ],
   exports:[
     StarComponent,

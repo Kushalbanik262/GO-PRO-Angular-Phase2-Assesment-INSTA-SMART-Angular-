@@ -1,12 +1,18 @@
 <div class="container-fluid my-2">
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="1000">
+
+        <div class="carousel-item shadow shadow-sm" data-bs-interval="4000" *ngFor="let item of sales">
           <div class="bg-light" style="width: 100%;">
-          <img src="https://www.seacoasteatlocal.org/wp-content/uploads/2015/03/veggis.png" style="height: 200px; width: 60%;" class="d-block mx-auto rounded" alt="..." >
+          <img [src]="item.image" style="height: 200px; width: 60%;" class="d-block mx-auto rounded" alt="..." >
+          <div class="carousel-caption d-none d-md-block my-4 mx-auto">
+            <div class="h5 text-light bg-info rounded shadow shadow-lg" style="width: 50%;">{{item.name}} {{item.offer}}
+            <p class="h6 text-dark bg-success rounded rounded-circle">{{item.details}}</p>
+          </div>
+          </div>
          </div>
-      </div>
-        <div class="carousel-item" data-bs-interval="2000">
+        </div>
+        <div class="carousel-item active" data-bs-interval="2000">
           <div class="bg-light" style="width: 100%;">
               <img src="https://annetravelfoodie.com/wp-content/uploads/2017/02/Vegetable.jpg" style="height: 200px; width: 60%;" class="d-block mx-auto rounded" alt="..." >
              </div>
@@ -22,3 +28,25 @@
       </button>
     </div>
 </div>
+
+<!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->

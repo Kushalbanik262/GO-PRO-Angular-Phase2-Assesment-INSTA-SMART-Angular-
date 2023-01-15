@@ -19,6 +19,11 @@
               <mat-icon matPrefix>local_offer</mat-icon>Sales Of the Day
             </a>
           </li>
+          <li class="nav-item">
+            <a [routerLink]="['/showcart/purchases']" class="nav-link text-light">
+              <mat-icon matPrefix>history</mat-icon>
+              Your Purchases
+            </a>
         </ul>
       <div class="d-flex justify-content-center">
         <ul class="navbar-nav">
@@ -40,7 +45,7 @@
       </div>
       <div class="mx-7">
         <div class="mx-auto">
-          <button mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
+          <button (click)="routeCart()" mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
             Cart <mat-icon matSuffix>shopping_cart</mat-icon>
         </button>
         </div>
@@ -48,7 +53,7 @@
     </div>
     </div>
   </div>
-<div class="display-3 text-center">Today's Sales Are Live Now!!!</div>
+<div class="display-3 text-center text-secondary">Check Our Awaited Sales!!! <mat-icon matPrefix>accessibility</mat-icon></div>
 <app-sales-oftd></app-sales-oftd>
 
 <div class="container-fluid p-2 my-4">

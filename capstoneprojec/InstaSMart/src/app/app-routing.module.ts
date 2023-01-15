@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUSComponent } from './Components/about-us/about-us.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:"login",
     loadChildren:()=>import("../app/Modules/auth-security/auth-security.module").then(x=>x.AuthSecurityModule)
+  },
+  {
+    path:"**",
+    component:NotFoundComponent
   }
 ];
 

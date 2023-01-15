@@ -63,10 +63,11 @@ export class CartEffects{
       ofType(CartDeletion),
       concatMap(action=>
         this.service.deleteCart(action.cartId).pipe(
+          tap(c=>{console.log("Deleting with cartID [from effects]:",action.cartId)}),
           map(()=>CartDeletion({cartId:action.cartId}))
         )
       )
     );
-  });
+  }, {dispatch:false});
 
 }

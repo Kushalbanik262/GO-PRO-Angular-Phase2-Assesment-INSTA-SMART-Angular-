@@ -1,17 +1,8 @@
-export enum SalesType{
-    SUMMER,
-    WINTER,
-    FESTIVE,
-    NEW_YEAR
-}
-
-
-
-
 export interface sales{
     id:number,
     name:string,
-    category:SalesType,
+    category:string,
     details:string,
-    offer:string
+    offer:string,
+    image:string
 }

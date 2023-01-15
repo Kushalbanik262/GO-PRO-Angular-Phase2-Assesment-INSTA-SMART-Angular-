@@ -1,1 +1,103 @@
-<p>payment works!</p>
+<div class="text-center display-4 my-3 text-info">
+  Welcome {{ name }} to our secure payment system
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-10 d-flex justify-content-start" *ngIf="LoadPayment">
+      <span class="text-warning">Please Wait While Loading Your Details ....</span>
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="col-md-10" *ngIf="!LoadPayment">
+      <mat-tab-group animationDuration="1000ms">
+        <mat-tab label="Personal Information">
+          <table class="table table-responsive mx-auto">
+            <tbody >
+              <tr class="mx-auto">
+                <mat-form-field>
+                  <mat-label>Check Your Id</mat-label>
+                  <input matInput type="text" [value]="Id" />
+                </mat-form-field>
+              </tr>
+              <tr class="mx-auto">
+                <mat-form-field>
+                  <mat-label>Check Your Name</mat-label>
+                  <input matInput type="text" [value]="name" />
+                </mat-form-field>
+              </tr>
+              <tr class="mx-auto">
+                <mat-form-field>
+                  <mat-label>Check Your Contact</mat-label>
+                  <input matInput type="text" [value]="contact" />
+                </mat-form-field>
+              </tr>
+              <tr class="mx-auto">
+                <mat-form-field>
+                  <mat-label>Check Your Address</mat-label>
+                  <textarea matInput type="text" [value]="address" ></textarea>
+                </mat-form-field>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+        <mat-tab label="Payment Information">
+          <div class="container my-3 mx-auto">
+            <div class="row">
+              <div class="col-md-8">
+              <div class="form-group">
+                <label for="holder" class="form-label">CARD Holder Name</label>
+                <input type="text" class="mb-2 form-control" disabled [value]="name">
+                <label for="cardid" class="form-label">CARD Number
+                   <mat-icon matPrefix>credit_card</mat-icon>
+                </label>
+                <input id="cardid" class="form-control mb-2" disabled [value]="card"/>
+                <label for="card" class="form-label">Your Card Type</label>
+                <select name="card" class="form-select mb-2" id="card">
+                  <option value="Debit">Debit</option>
+                  <option value="Credit">Credit</option>
+                </select>
+                <label for="cardn" class="form-label">Card Name</label>
+                <input type="text" class="form-control mb-2" [value]="Cname">
+
+                <label for="bank" class="form-label">Bank Name
+                  <mat-icon matPrefix>account_balance</mat-icon>
+                </label>
+                <input type="text" class="form-control mb-2" id="bank" disabled [value]="Bname"/>
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control mb-2" autofocus [value]="cvv"/>
+                <span class="form-text text-muted">Enter Last 3 Digits</span>
+              </div>
+            </div>
+              <div class="col-md-4">
+                <img src="https://www.pngfind.com/pngs/m/335-3352809_no-title-paypal-credit-card-secure-hd-png.png"  alt="" class="card-img-top">
+                <div class="container-fluid">
+                  <span class="text-info text-center my-2 mx-auto">Our Gateway Partner</span>
+                  <img style="width: 16rem; height: 50%;" src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-08/13/full/1597309837-7212.jpg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Confirm and Pay">
+          <div class="card p-4">
+            <div class="card-header text-center">
+                  Payment Confirmation
+            </div>
+            <img  *ngIf="!DoPayment" style="width: 50%; height: 300px;" src="https://www.thesslstore.com/blog/wp-content/uploads/2017/12/iStock-836755066.jpg" alt="" class="card-img-top">
+            <div class="card-body"  *ngIf="!DoPayment">
+              <div class="card-title form-text text-warning"><span class="text-warning display-3">We Make Your Payment Safe</span></div>
+              <div class="card-title">Amount :<span class="text-danger"> {{amount | currency : "INR"}}</span></div>
+              <button (click)="doPayment()" mat-raised-button color="primary" class="mx-2">Pay</button>
+              <button mat-raised-button color="warn" [routerLink]="['/showcart']" class="mx-2">Cancel</button>
+           </div>
+           <div class="card-body"  *ngIf="DoPayment">
+            <div class="card-title"><span class="text-danger text-center display-3">Please wait while We are processing your payment...</span></div>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

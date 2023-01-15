@@ -20,8 +20,8 @@ import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     LoginComponent,
+    AdminPRComponent,
     PaymentComponent,
-    AdminPRComponent
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartSave, CartUpdation } from './../ReduxModules/CartRedux/cart.actions';
 import { Products } from './../Entities/products';
 import { LoginService } from 'src/app/Services/Login.service';
@@ -22,7 +23,7 @@ export class CartService{
  subscribe!:Subscription;
  AllProducts:Set<number> = new Set<number>();
 
- constructor(private store:Store<any>){
+ constructor(private store:Store<any>,private snack:MatSnackBar){
   this.store.dispatch(CartLoading());
   this.subscribe = this.store.subscribe(
     {
@@ -51,8 +52,8 @@ export class CartService{
 //   );
 //  }
 
- addCurrentCart(product:Products):boolean{ //Adding To the Cart Also checking If it Exists Or not
 
+ addCurrentCart(product:Products):boolean{ //Adding To the Cart Also checking If it Exists Or not
   let allcarts = [...this.allCarts];
   let currentCart:Cart;
   //this.subscribe.unsubscribe();
@@ -67,7 +68,7 @@ export class CartService{
             break;
       }
    }
-
+    this.snack.open(`Already Added Product ${product.name} incremented Successfully`,"OK");
     return false;
   }
   else{
@@ -75,6 +76,7 @@ export class CartService{
    console.log("Adding The Cart",cart);
    this.store.dispatch(CartSave({cart}));
    this.AllProducts.add(product.id);
+   this.snack.open(`New Product ${product.name} Added Successfully`,"OK");
   }
   return true;
  }
