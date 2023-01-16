@@ -37,17 +37,17 @@
 
       <div class="navbar-collapse d-flex justify-content-end">
            <li class="nav-item" *ngIf="isLoggedIn()">
-            <span class="badge badge-primary text-light" style="font-size: 17px"
+            <span id="loginName" class="badge badge-primary text-light" style="font-size: 17px"
             >{{getName() | uppercase}}<mat-icon matSuffix>person</mat-icon>
           </span>
            </li>
-           <li class="mx-2 nav-item" *ngIf="!isLoggedIn()">
+           <li class="mx-2 nav-item" *ngIf="!isLoggedIn()" id="login">
             <button class="btn btn-success p-2" [routerLink]="['login']" >
                 login
                 <mat-icon>login</mat-icon>
             </button>
            </li>
-           <li *ngIf="isLoggedIn()">
+           <li *ngIf="isLoggedIn()" id="logout">
             <button class="btn btn-danger p-2" (click)="logout()">
                 logout
                 <mat-icon>logout</mat-icon>

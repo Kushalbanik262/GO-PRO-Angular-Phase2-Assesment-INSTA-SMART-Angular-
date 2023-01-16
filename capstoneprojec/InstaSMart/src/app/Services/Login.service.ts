@@ -21,6 +21,10 @@ export class LoginService{
     this.isLoggedIn = false;
   }
 
+  IsLoggedIn(){
+    return this.isLoggedIn;
+  }
+
   getId(){
     return this.currentUser.id;
   }

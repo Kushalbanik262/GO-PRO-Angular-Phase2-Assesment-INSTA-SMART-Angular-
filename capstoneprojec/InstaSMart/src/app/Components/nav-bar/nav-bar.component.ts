@@ -17,7 +17,7 @@ export class NavBarComponent implements OnInit {
   }
 
   isLoggedIn(){
-    return this.service.isLoggedIn;
+    return this.service.IsLoggedIn();
   }
 
 

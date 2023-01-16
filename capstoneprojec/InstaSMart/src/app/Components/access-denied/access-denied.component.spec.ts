@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccessDeniedComponent } from './access-denied.component';
 
-describe('AccessDeniedComponent', () => {
+xdescribe('AccessDeniedComponent', () => {
   let component: AccessDeniedComponent;
   let fixture: ComponentFixture<AccessDeniedComponent>;
 

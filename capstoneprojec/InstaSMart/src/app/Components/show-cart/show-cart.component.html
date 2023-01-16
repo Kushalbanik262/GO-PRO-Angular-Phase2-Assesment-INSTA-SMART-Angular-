@@ -75,7 +75,7 @@
             </table>
         </mat-card-content>
         <mat-card-actions>
-          <button class="mx-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="warn" >Checkout</button>
+          <button class="mx-auto" id="chkout" [disabled] = "!hasCart()"  data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="warn" >Checkout</button>
         </mat-card-actions>
         <mat-card-actions>
           <button class="mx-auto" mat-raised-button color="primary" [routerLink]="['']" >Continue Shopping</button>

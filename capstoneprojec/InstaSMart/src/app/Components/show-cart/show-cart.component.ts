@@ -8,7 +8,7 @@ import { Cart } from 'src/app/Entities/cart';
 import { CartService } from './../../Services/Cart.service';
 import { Component, OnInit } from '@angular/core';
 
-interface ProductMap{
+export interface ProductMap{
   product:Products,
   quantity:number,
   updated:string
@@ -21,7 +21,7 @@ interface ProductMap{
   styleUrls: ['./show-cart.component.css']
 })
 export class ShowCartComponent implements OnInit {
-  allCarts!:Cart[];
+  allCarts:Cart[] = [];
   products!:Products[];
   name:string = "";
   productMap:ProductMap[] = new Array();
@@ -82,6 +82,10 @@ export class ShowCartComponent implements OnInit {
     // setTimeout(()=>{this.loader = true},1000);
   }
 
+  hasCart(){
+    return this.allCarts.length > 0;
+  }
+
 
   ngOnInit(): void {
     this.subscribe = this.store.select(ProductLoadingSuccess).subscribe(
@@ -108,6 +112,7 @@ export class ShowCartComponent implements OnInit {
     let cart = {...this.getCartByPId(productMap.product?.id)[0]}; //Getting The Cart
     cart.quantity = cart.quantity + 1;
     this.store.dispatch(CartUpdation({cart}));
+    return cart;
   }
 
   decrease(productMap:ProductMap){
@@ -115,6 +120,7 @@ export class ShowCartComponent implements OnInit {
     let cart = {...this.getCartByPId(productMap.product?.id)[0]}; //Getting The Cart
     cart.quantity = cart.quantity -1;
     this.store.dispatch(CartUpdation({cart}));
+    return cart;
   }
 
   getTotal(data:ProductMap){

@@ -1,5 +1,5 @@
 import { Component, OnInit,AfterViewChecked,ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,20 +7,37 @@ import { Router } from '@angular/router';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent implements OnInit{
-  timerFlag:boolean = false;
-  @ViewChild('frm', { read: NgForm })frm!:NgForm;
-  constructor(private router:Router) { }
+export class ContactUsComponent implements OnInit {
 
 
+  frm = new FormGroup({
+    firstname:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+    lastName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
+    phn:new FormControl('',[Validators.required,Validators.pattern("[789][0-9]{9}")]),
+    store:new FormControl('Fresh Mart',[Validators.required]),
+    address:new FormControl('',[]),
+    comments:new FormControl('',[])
+  });
+
+  timerFlag:boolean = true;
+
+  constructor(private router:Router) {this.timerFlag = false; }
   ngOnInit(): void {
-    this.timerFlag = false;//Setting Initially False In loading Mode
-    console.log("Inited The Component");
-    setInterval(()=>{this.timerFlag = true},1200); //creating custom loader
+     setInterval(()=>{this.timerFlag = true;},1000);
   }
+  // ngAfterViewChecked(): void {
+  //   console.log(this.frm);
+  // }
 
-  submit(data:any){ //The Contact Us Submitted Data
-    console.log("The Contact Us submitted data is:",data);
+
+  // ngOnInit(): void {
+  //   this.timerFlag = true;//Setting Initially False In loading Mode
+  //   console.log("Inited The Component");
+  //  //setInterval(()=>{this.timerFlag = true},1200); //creating custom loader
+  // }
+
+  submit(){ //The Contact Us Submitted Data
+    console.log("The Contact Us submitted data is:",this.frm.value);
   }
 
   mdlClose(){

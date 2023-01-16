@@ -1,7 +1,7 @@
 
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSharedModule } from './Modules/app-shared/app-shared.module';
 import { MaterialModuleModule } from './Modules/material-module/material-module.module';
 import { AccessDeniedComponent } from './Components/access-denied/access-denied.component';
@@ -38,6 +38,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MaterialModuleModule,
     AppSharedModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}),
      HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApi),
     HttpClientModule,

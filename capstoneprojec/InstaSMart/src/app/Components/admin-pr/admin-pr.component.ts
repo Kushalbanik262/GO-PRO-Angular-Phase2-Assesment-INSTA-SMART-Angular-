@@ -28,10 +28,10 @@ export class AdminPRComponent implements OnInit {
      id:new FormControl('',[Validators.required]),
      name:new FormControl('',[Validators.required,Validators.pattern(/^[a-z ,.'-]+$/i),Validators.maxLength(50),Validators.minLength(2)]),
      category:new FormControl('',[Validators.required]),
-     details:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+     details:new FormControl('',[Validators.required,Validators.maxLength(100)]),
      price:new FormControl('',[Validators.required,Validators.min(1),Validators.max(100000)]),
      image:new FormControl('',[]),
-     feedback:new FormControl('',[Validators.maxLength(50)])
+     feedback:new FormControl('',[Validators.maxLength(100)])
   })
   isEdit:boolean = false;
   constructor(private store:Store<any>) { this.item = {id:-1,category:productCat.Daily,details:"",feedback:"",image:[],name:"",price:-1

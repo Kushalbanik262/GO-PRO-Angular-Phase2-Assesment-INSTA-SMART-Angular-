@@ -35,7 +35,7 @@
           <div *ngIf="!idValidity() && (this.frm?.get('id')?.dirty || this.frm?.get('id')?.touched)" class="alert alert-warning text-center">
             Must Have a proper Id
           </div>
-          <label for="Id" class="form-label">Enter Product Id*</label>
+          <label for="id" class="form-label">Enter Product Id*</label>
           <input type="text"  class="form-control mb-1" id="id" name="id" formControlName="id">
 
           <div *ngIf="!nameValidity() && (this.frm?.get('name')?.dirty || this.frm?.get('name')?.touched)" class="alert alert-warning text-center">
@@ -82,8 +82,8 @@
           <textarea type="text" class="form-control mb-1" id="feedback" name="feedback" formControlName="feedback"></textarea>
 
         <div class="my-2">
-            <button *ngIf="!isEdit"mat-raised-button color="primary" class="mx-2" [disabled] = "!isValid()" type="submit">Add Product</button>
-            <button *ngIf="isEdit" mat-raised-button color="warning"  class="mx-2" [disabled] = "!isValid()" type="submit">Update Product</button>
+            <button id="add" *ngIf="!isEdit"mat-raised-button color="primary" class="mx-2" [disabled] = "!isValid()" type="submit">Add Product</button>
+            <button id="update" *ngIf="isEdit" mat-raised-button color="warning"  class="mx-2" [disabled] = "!isValid()" type="submit">Update Product</button>
             <button mat-button class="btn btn-outline-danger" type="reset">Reset</button>
         </div>
         </div>

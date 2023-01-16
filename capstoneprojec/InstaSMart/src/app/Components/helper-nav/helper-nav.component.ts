@@ -28,7 +28,7 @@ export class HelperNavComponent implements OnInit,OnChanges {
 
   }
   isLoggedin(){ //Checking If the user logged in or not
-    return this.Lservice.isLoggedIn;
+    return this.Lservice.IsLoggedIn();
   }
 
   routeCart(){

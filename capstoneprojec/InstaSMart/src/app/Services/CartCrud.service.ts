@@ -14,7 +14,7 @@ import { Injectable } from "@angular/core";
 export class CartCrudService{
   constructor(private http:HttpClient){}
   url:string = "api/cart";
-
+  carts:Cart[] = [];
 
 
   saveCart(cart:Cart):Observable<Cart>{
@@ -26,6 +26,7 @@ export class CartCrudService{
     .pipe(
         tap(data=>{
             console.warn("Saved Data successfully From Cart Service",data);
+            this.carts.push(data);
         }),
         catchError(err => {
             throw 'error Details: Coming From Cart Service While saving' + err;
@@ -35,7 +36,9 @@ export class CartCrudService{
 
   getCart():Observable<Cart[]>{ //Getting The Current Cart
     return this.http.get<Cart[]>(this.url).pipe(
-      tap(data=>{console.log("Coming From Cart Service",data);}),
+      tap(data=>{console.log("Coming From Cart Service",data);
+                this.carts = data;
+      }),
       catchError(error=>{console.log(error);return of();})
     );
   }
@@ -50,6 +53,7 @@ export class CartCrudService{
     .pipe(
         tap(data=>{
             console.warn("Updated Cart successfully From Cart Service",data);
+            this.carts = this.carts.map(c=>c.id == cart.id ? c : cart);
         }),
         map(()=>cart),
         catchError(err => {
@@ -64,6 +68,7 @@ export class CartCrudService{
     return this.http.delete(durl,{headers}).pipe(
       tap((data)=>{
         console.info(`Deleting Data: ${data}`);
+        this.carts = this.carts.filter(c=>c.id != cid);
     }),
      catchError(err => {
         throw 'error Details: ' + err;
@@ -71,4 +76,7 @@ export class CartCrudService{
     )
    }
 
+   getCarts(){
+    return this.carts;
+   }
 }
