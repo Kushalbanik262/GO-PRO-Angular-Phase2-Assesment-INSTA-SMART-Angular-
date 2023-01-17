@@ -22,6 +22,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './AppEffects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+/**
+ * The Main App Module
+ */
 @NgModule({
   declarations: [
     AppComponent, //Main App Component
@@ -56,6 +59,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     //and this 'InMemoryWebApi' is the speccific class which implements the 'InMemoryDbService' interface and the service is coming from that
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent]//BootStraping The AppComponent as Entryb Point
 })
 export class AppModule { }

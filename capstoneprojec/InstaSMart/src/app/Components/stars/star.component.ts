@@ -6,17 +6,21 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   styleUrls: ['./star.component.css']
 })
 export class StarComponent implements OnInit,OnChanges {
-  
-  @Input() star:number = 0;
-  width:number = 75;
+
+  @Input() star:number = 0; //Getting The Input as Rating
+  width:number = 75;//The Total width
   constructor() { }
-  
+
   ngOnInit(): void {
   }
 
+  /**
+   *
+   * @param changes The Changes
+   */
   ngOnChanges(changes: SimpleChanges): void {
 
-    this.width =  this.star *15;
+    this.width =  this.star *15; //Calculating The Width
     console.log(this.width);
 
   }

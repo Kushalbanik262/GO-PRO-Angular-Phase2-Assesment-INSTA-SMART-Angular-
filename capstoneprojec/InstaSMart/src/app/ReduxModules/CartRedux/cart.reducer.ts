@@ -3,6 +3,7 @@ import { Cart } from './../../Entities/cart';
 import { createReducer, on } from '@ngrx/store';
 
 
+//The Interface For Denoting The Cart State At any Instance
 export interface CartState{
   carts:Cart[],
   isLoaded:boolean,
@@ -11,7 +12,7 @@ export interface CartState{
   error:string
 };
 
-
+//The Initial Cart State
 export const initCartState:CartState = {
   carts:[],
   isLoaded:false,
@@ -20,13 +21,22 @@ export const initCartState:CartState = {
   error:""
 }
 
+/**
+ * @returns the current time in string format
+ */
 function getCurrent(){
   return new Date().toLocaleTimeString();
 }
 
-
+/**
+ * The Reducer For Changing the states
+ */
 export const cartReducer = createReducer(
 initCartState,
+
+/**
+ * State Changing When The Loading Happens
+ */
 on(CartLoading,(state)=>({
   ...state,
   isLoaded:false,
@@ -35,7 +45,9 @@ on(CartLoading,(state)=>({
   updated:getCurrent()
 })),
 
-
+/**
+ * State When The Loading Gets Successful
+ */
 on(CartLoadingSuccessful,(state,action)=>({
   ...state,
   carts:action.carts,
@@ -44,6 +56,9 @@ on(CartLoadingSuccessful,(state,action)=>({
   updated:getCurrent()
 })),
 
+/**
+ * State When The Loading Gets Failed
+ */
 on(CartLoadingFail,(state,action)=>({
   ...state,
   error:action.error,
@@ -53,6 +68,9 @@ on(CartLoadingFail,(state,action)=>({
 })),
 
 
+/**
+ * State When the Updation Is Successful
+ */
 on(CartUpdationSuccess,(state,action)=>({
   ...state,
   carts:state.carts.map(c=>(c.id == action.cart?.id? action.cart : c)),
@@ -61,6 +79,9 @@ on(CartUpdationSuccess,(state,action)=>({
   updated:getCurrent()
 })),
 
+/**
+ * State When the Cart Updation Gets failed
+ */
 on(CartUpdationFail,(state,action)=>({
   ...state,
   isLoaded:false,
@@ -70,6 +91,9 @@ on(CartUpdationFail,(state,action)=>({
 })),
 
 
+/**
+ * State When The Cart Deletion is successful
+ */
 on(CartDeletion,(state,action)=>({
   ...state,
   carts:state.carts.filter(c=>c.id !== action.cartId),
@@ -79,6 +103,9 @@ on(CartDeletion,(state,action)=>({
 })),
 
 
+/**
+ * State When the Cart Saving is Successful
+ */
 on(CartSave,(state,action)=>({
 ...state,
 carts:[action.cart,...state.carts],

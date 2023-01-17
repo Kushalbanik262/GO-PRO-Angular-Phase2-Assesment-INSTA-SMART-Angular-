@@ -12,6 +12,11 @@ import { UserPriviledges } from '../Entities/users';
   providedIn: 'root'
 })
 export class AdminGuardGuard implements CanActivate { //Implementing the CanActivate interface
+  /**
+   *
+   * @param service Login Service For User Login Related Data
+   * @param router Router Object For Routing
+   */
   constructor(private service:LoginService,private router:Router){}//Dependency Injecting The LoginService and Router
   canActivate(//Overriding the canActivate Method
     route: ActivatedRouteSnapshot,

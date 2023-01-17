@@ -9,10 +9,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed, inject,getTestBed } from '@angular/core/testing';
 import { SalesService } from '../Services/SalesService';
 
-
+/**
+ * Spec To test Sales Service
+ */
 
 
 describe('Sales Service', () => {
+
+  /**
+   * All The Sales,service,injector,httpMock is there
+   */
   let service: SalesService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -29,12 +35,12 @@ describe('Sales Service', () => {
 
     }).compileComponents();
 
-  service=TestBed.get(SalesService);
+  service=TestBed.get(SalesService); //Generating the SalesService
   injector = getTestBed();
-  httpMock = injector.get(HttpTestingController);
+  httpMock = injector.get(HttpTestingController); //Creating the HTTPMock By injecting
 
 
-   sales =[
+   sales =[//Creating some sales
     {
       id:1,
       category:"Winter Sale",
@@ -55,16 +61,25 @@ describe('Sales Service', () => {
 
   });
 
+  /**
+   * Verify Must be Called After each test to close the http connection for testing
+   */
   afterEach(() => {
     console.log("After Each Called");
     httpMock.verify();
   });
 
 
+  /**
+   * The Service Should Be Created
+   */
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
+  /**
+   * All The Sales Must Be fetched Properly
+   */
   it("Get All Sales",()=>{
     let response:Products;
     const fn=spyOn(service, 'getAllSales').and.returnValue(

@@ -2,6 +2,10 @@ import { SalesLoading, SalesLoadingSuccess, SalesLoadingError } from './sales.ac
 import { createReducer, on } from '@ngrx/store';
 import { sales } from '../../Entities/sales';
 
+
+/**
+ * The Main Sale State
+ */
 export interface SaleState{
   error:string,
   update:string,
@@ -10,6 +14,9 @@ export interface SaleState{
 }
 
 
+/**
+ * The Initial State For Sales
+ */
 export const initSaleState:SaleState = {
   error:"",
   processing:false,
@@ -18,14 +25,23 @@ export const initSaleState:SaleState = {
 }
 
 
+/**
+ * The Main Sale Reducer
+ */
 export const SalesReducer = createReducer(
 initSaleState,
+/**
+ * State Management when the sales Loading
+ */
 on(SalesLoading,(state)=>({
   ...state,
   processing:true,
   update:new Date().toLocaleTimeString()
 })),
 
+/**
+ * State Management when the sales Loading success
+ */
 on(SalesLoadingSuccess,(state,action)=>({
   ...state,
   sales:action.sales,
@@ -33,7 +49,9 @@ on(SalesLoadingSuccess,(state,action)=>({
   processing:false
 })),
 
-
+/**
+ * State Management when the sales loading has errors
+ */
 on(SalesLoadingError,(state,action)=>({
   ...state,
   error:action.error,

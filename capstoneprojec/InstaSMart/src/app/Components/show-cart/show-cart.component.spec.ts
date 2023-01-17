@@ -13,7 +13,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductMap, ShowCartComponent } from './show-cart.component';
 
-describe('ShowCartComponent', () => {
+/**
+ * Cart Component Testing
+ */
+describe('ShowCart Component', () => {
   let component: ShowCartComponent;
   let fixture: ComponentFixture<ShowCartComponent>;
 
@@ -40,16 +43,16 @@ describe('ShowCartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', () => { //Should Create The Component
     expect(component).toBeTruthy();
   });
 
-  it("Button Must Be Disabled If there is not Items in cart",()=>{
+  it("Button Must Be Disabled If there is not Items in cart",()=>{ //Button State Testing for disability
     expect(fixture.nativeElement.querySelector("#chkout").disabled).toBeTrue();
   });
 
-  it("Button Must Be Enabled If There Are Atleast one item in the cart",()=>{
-    let current = Object.assign([],component.allCarts);
+  it("Button Must Be Enabled If There Are Atleast one item in the cart",()=>{ //Button State Testing for Non disability
+    let current = Object.assign([],component.allCarts); //Immutability
      current.push(
       {
         id:101,
@@ -62,6 +65,10 @@ describe('ShowCartComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector("#chkout").disabled).toBeFalse();
   });
+
+  /**
+   * Product Increment When The Plus Icon is clicked
+   */
 
   it("Must Increase When The '+' Button is Clicked",()=>{
     let currentCart = Object.assign([],component.allCarts);
@@ -94,9 +101,12 @@ describe('ShowCartComponent', () => {
    expect(cart.quantity).toBe(2);
   });
 
+  /**
+   * Product Decrement When The Plus Icon is clicked
+   */
   it("Must Decrease When The '-' Button is Clicked",()=>{
     let currentCart = Object.assign([],component.allCarts);
-     currentCart.push(
+     currentCart.push( //Adding to the current cart
       {
         id:101,
         quantity:2,
@@ -106,7 +116,7 @@ describe('ShowCartComponent', () => {
     component.allCarts = currentCart;
 
 
-    let cart = component.decrease({
+    let cart = component.decrease({ //Decreasing The Current Cart
       product:{
          id:101,
           category:productCat.Daily,
@@ -122,7 +132,7 @@ describe('ShowCartComponent', () => {
       updated:new Date().toLocaleTimeString()
     });
 
-   expect(cart.quantity).toBe(1);
+   expect(cart.quantity).toBe(1); //Expecting There Should Be single Item,
   });
 
 });

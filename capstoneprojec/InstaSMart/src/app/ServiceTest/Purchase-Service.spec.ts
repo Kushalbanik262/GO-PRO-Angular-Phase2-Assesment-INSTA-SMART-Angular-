@@ -8,10 +8,15 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { productCat } from '../Entities/products';
 
-
+/**
+ * Spec For testing the purchase service
+ */
 
 
 describe('Purchase Service', () => {
+  /**
+   * Using The service,injector,httpmock and purchases for purchase service
+   */
   let service:PurchaseService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -29,12 +34,12 @@ describe('Purchase Service', () => {
 
     }).compileComponents();
 
-  service=TestBed.get(PurchaseService);
+  service=TestBed.get(PurchaseService); //creating the service
   injector = getTestBed();
   httpMock = injector.get(HttpTestingController);
 
 
-   Purchases = {
+   Purchases = { //Creating a demo purchase with three products
     products:[
       {
         id:12,
@@ -75,11 +80,17 @@ describe('Purchase Service', () => {
 
   });
 
+  /**
+   * After each Must Be called with verify method for closing previous http connection
+   */
   afterEach(() => {
     console.log("After Each Called");
     httpMock.verify();
   });
 
+  /**
+   * Expecting The Service should be created
+   */
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -90,7 +101,7 @@ describe('Purchase Service', () => {
 
   it("Creating Purchases",()=>{
     let response:Purchases;
-    service.carts = [
+    service.carts = [ //Adding to the carts
       {
         id:12,
         quantity:1,
@@ -109,10 +120,10 @@ describe('Purchase Service', () => {
     ];
 
 
-    service.products = Purchases.products;
-    service.addToPurchase();
+    service.products = Purchases.products; //Adding the products
+    service.addToPurchase(); //calling the function to add purchase
 
-    expect(service.purchases).toEqual(Purchases);
+    expect(service.purchases).toEqual(Purchases); //Expecting The Purchase to be Purchases
 
   });
 

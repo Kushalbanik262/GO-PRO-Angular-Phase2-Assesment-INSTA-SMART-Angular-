@@ -10,6 +10,9 @@ import { createEffect } from '@ngrx/effects';
 import { CartCrudService } from './../../Services/CartCrud.service';
 import { Actions } from '@ngrx/effects';
 
+/**
+ * The Cart Effects Module
+ */
 
 @Injectable(
   {
@@ -17,8 +20,18 @@ import { Actions } from '@ngrx/effects';
   }
 )
 export class CartEffects{
+  /**
+   *
+   * @param action$ The Action to Listen If There is any store dispatched
+   * @param service The Crud Service For talking to HTTP services
+   * @param store The Store for getting state related Operations
+   */
   constructor(private action$:Actions,private service:CartCrudService,private store:Store<CartState>){}
-  loadCarts$ = createEffect(()=>{ //Loading Products
+
+  /**
+   * For All The cart Loading
+   */
+  loadCarts$ = createEffect(()=>{ //Loading Products Effects
     return this.action$.pipe(
       ofType(CartLoading),
       mergeMap(()=>
@@ -32,6 +45,9 @@ export class CartEffects{
   });
 
 
+  /**
+   * FOr Adding To The Cart
+   */
   cartAdd$ = createEffect(()=>
     this.action$.pipe(
       ofType(CartSave),
@@ -45,6 +61,9 @@ export class CartEffects{
     {dispatch:false}
   );
 
+  /**
+   * For The Updation Of the Cart
+   */
   updateCart$ = createEffect(()=>{
     return this.action$.pipe(
       ofType(CartUpdation),
@@ -58,6 +77,9 @@ export class CartEffects{
     );
   });
 
+  /**
+   * For The Deletion Of The Cart
+   */
   deleteCart$ = createEffect(()=>{
     return this.action$.pipe(
       ofType(CartDeletion),

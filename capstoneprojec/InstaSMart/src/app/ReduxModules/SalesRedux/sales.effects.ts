@@ -7,14 +7,24 @@ import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { SalesService } from 'src/app/Services/SalesService';
 
-
+/**
+ * The Main Sale Effects
+ */
 
 @Injectable({
   providedIn:"root"
 })
 export class SalesEffect{
+  /**
+   *
+   * @param actions$ The Action we need to listen for any store dispatches
+   * @param service Sales Service For Talking With HTTP Methods
+   */
   constructor(private actions$:Actions,private service:SalesService){}
 
+  /**
+   * For Loading The Sales
+   */
     loadSales$ = createEffect(()=>{
     return this.actions$.pipe(
       ofType(SalesLoading),

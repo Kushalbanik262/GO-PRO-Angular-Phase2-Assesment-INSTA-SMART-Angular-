@@ -6,10 +6,15 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { UserPriviledges, Users } from '../Entities/users';
 import { UserService } from './../Services/User.service';
 
-
+/**
+ * Spec To test User Service
+ */
 
 
 describe('User Service', () => {
+  /**
+   * Variables For Service,injector,httpMock and Users
+   */
   let service:UserService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -26,11 +31,11 @@ describe('User Service', () => {
 
     }).compileComponents();
 
-  service=TestBed.get(UserService);
+  service=TestBed.get(UserService);//Creating The Service By Injecting
   injector = getTestBed();
-  httpMock = injector.get(HttpTestingController);
+  httpMock = injector.get(HttpTestingController); //Creating The Mock Using Injector
 
-
+  //Creating Some Dummy Users
    users =[
     {
       id:101,
@@ -72,6 +77,11 @@ describe('User Service', () => {
 
   });
 
+
+
+  /**
+   * Verify Must be Called After each test to close the http connection for testing
+   */
   afterEach(() => {
     console.log("After Each Called");
     httpMock.verify();
@@ -87,15 +97,15 @@ describe('User Service', () => {
 
   it("Get All Current Carts",()=>{
     let response:Users;
-    const fn=spyOn(service, 'getAllUsers').and.returnValue(
+    const fn=spyOn(service, 'getAllUsers').and.returnValue( //Spying on the service for 'getAllUsers' method
      of(users)
     );
 
     service.getAllUsers().subscribe(response=>{
-      expect(response).toEqual(users);
+      expect(response).toEqual(users); //Fethed All The Datas Must be Equals to the created Users
     });
 
-   expect(fn).toHaveBeenCalled();
+   expect(fn).toHaveBeenCalled(); //Expecting The Spy Method to Have Been called Once
   });
 
 

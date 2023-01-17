@@ -30,6 +30,11 @@ export class LoginComponent implements OnInit,OnChanges {
     console.log("View Changed");
     if(this.loginFlag){this.loginFlag = false;}
   }
+
+  /**
+   *
+   * @param data The Credentials For Login
+   */
   tryLogin(data:credentials){ //Trying to Login With User entered credentials
     console.log("Trying With Credentials:",data);
     this.loginFlag = true;

@@ -10,6 +10,9 @@ import { ContactUsComponent } from './contact-us.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
+/**
+ * The Contact US Form Testing
+ */
 describe('Contact US Form', () => {
   let component: ContactUsComponent;
   let fixture: ComponentFixture<ContactUsComponent>;
@@ -172,7 +175,7 @@ describe('Contact US Form', () => {
       firstname:"Kushal",
       lastName:"Banik",
       address:"Kolkata",
-      phn:"",
+      phn:"",//Phone Missing
       comments:"All Services Are Good!",
       store:"Fresh Mart"
     });
@@ -182,7 +185,7 @@ describe('Contact US Form', () => {
 
     component.frm.setValue({
       firstname:"Kushal",
-      lastName:"",
+      lastName:"", //LastName missing
       address:"Kolkata",
       phn:"7980859303",
       comments:"All Services Are Good!",
@@ -194,8 +197,8 @@ describe('Contact US Form', () => {
 
 
     component.frm.setValue({
-      firstname:"Kushal",
-      lastName:"",
+      firstname:"",//FirstName Missing
+      lastName:"Banik",
       address:"Kolkata",
       phn:"7980859303",
       comments:"All Services Are Good!",

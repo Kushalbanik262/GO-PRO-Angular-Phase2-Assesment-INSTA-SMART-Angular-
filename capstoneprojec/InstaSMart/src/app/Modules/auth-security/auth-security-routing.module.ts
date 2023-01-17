@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
-
+/**
+ * Child Routes For Auth Security module
+ */
 const routes: Routes = [
   {
     path:"", //Root Path For Login

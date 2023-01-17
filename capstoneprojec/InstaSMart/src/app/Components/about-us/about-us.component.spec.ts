@@ -21,10 +21,10 @@ describe('AboutUSComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("Should Be The Name About Us",()=>{ //Checking If it's Rendering with appropiate title or not
+  it("Should Be The Title About Us",()=>{ //Checking If it's Rendering with appropiate title or not
     fixture = TestBed.createComponent(AboutUSComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.querySelector("#title").textContent).toContain("Know More About Us"); //Checking the title format
+    expect(fixture.debugElement.nativeElement.querySelector("title").textContent).toContain("Know More About Us"); //Checking the title format
   })
 });

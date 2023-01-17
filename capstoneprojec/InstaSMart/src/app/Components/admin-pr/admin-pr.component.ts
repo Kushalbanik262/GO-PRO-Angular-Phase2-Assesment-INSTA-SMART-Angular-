@@ -11,6 +11,9 @@ import { Store } from '@ngrx/store';
   templateUrl: './admin-pr.component.html',
   styleUrls: ['./admin-pr.component.css']
 })
+/**
+ * This is Admin Specific Component
+ */
 export class AdminPRComponent implements OnInit {
 
   loader:boolean = false; //This is a simple Loader
@@ -36,6 +39,14 @@ export class AdminPRComponent implements OnInit {
   })
 
   isEdit:boolean = false; //Is Admin Wants to Edit
+
+
+
+  /**
+   *
+   * @param store ngrx Store for Redux Operations
+   * @param snack SnackBar For Creating The PopUp
+   */
   constructor(private store:Store<any>,private snack:MatSnackBar) { this.item = {id:-1,category:productCat.Daily,details:"",feedback:"",image:[],name:"",price:-1
   ,ratings:0.0,reviews:[] //Injecting Store and initializing the item
 }}
@@ -47,10 +58,20 @@ export class AdminPRComponent implements OnInit {
       (response:any)=>{console.log(response.products.products);this.productsArr = response.products.products;}) //Directly Assigning to current Product Array
   }
 
+  /**
+   *
+   * @param data Getting The Type
+   * @returns Returning The String Product Type
+   */
   getCategory(data:productCat){ //Getting  the current Product category
     return productCat[data];
   }
 
+
+  /**
+   *
+   * @returns Returning The Details Coming From The Form
+   */
   getAllDetails(){ //Getting All the form Details
     console.log("The Form Data is:",this.frm);
     let id = this.frm.get("id")!.value;
@@ -110,6 +131,9 @@ export class AdminPRComponent implements OnInit {
   }
 
   //When The Item is Ediatble then setting the from values with default product vales
+  /**
+   * @param product The Product Item Which is needed to be entered
+   */
   editItem(product:Products){
     this.item = product;
     console.info(`The Item To be edited : ${product}`);
@@ -126,35 +150,65 @@ export class AdminPRComponent implements OnInit {
     console.log(this.frm.valid);
   }
 
+  /**
+   * @returns Is this Form is Valid Or not
+   */
 isValid(){ //Is the form valid or not
   return this.frm.valid;
 }
 
 
+/**
+ * @returns Returns form Validity
+ */
 idValidity(){ //Is the Id valid or not
   return this.frm.get("id")?.valid;
 }
 
+/**
+ * @returns Returns Name Validity
+ */
 nameValidity(){ //Is he name valid or not
   return this.frm.get("name")?.valid;
 }
 
+/**
+ * @returns Returns Category Validity
+ */
 categoryValidity(){ //is The category valid or not
   return this.frm.get("category")?.valid;
 }
 
+
+/**
+ * @returns Returns Feedback Validity
+ */
 feedbackValidity(){ //Is the feedback valid or not
   return this.frm.get("feedback")?.valid;
 }
 
+
+
+/**
+ * @returns Returns Details Validity
+ */
 detailsValidity(){ //Is the details Valid or not
   return this.frm.get("details")?.valid;
 }
 
+
+/**
+ * @returns Returns Price Validity
+ */
 priceValidity(){//Is the Price Valid or not
   return this.frm.get("price")?.valid;
 }
 
+
+/**
+ *
+ * @param item Product Item Which is Needed To be deleted
+ */
 deleteItem(item:Products){ //Deleting the Item
   console.warn("Item Need To be deleted",item.name);
   this.store.dispatch(ProductDelete({pid:item.id})); //Dispatching the service for deletion

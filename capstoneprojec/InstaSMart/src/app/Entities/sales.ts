@@ -1,3 +1,7 @@
+
+/**
+ * The Sales Interface For the Sales
+ */
 export interface sales{
     id:number,
     name:string,

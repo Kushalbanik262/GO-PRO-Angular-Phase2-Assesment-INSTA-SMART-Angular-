@@ -8,17 +8,22 @@ import { ShowCartComponent } from '../../Components/show-cart/show-cart.componen
 import { PurchesesComponent } from '../../Components/purcheses/purcheses.component';
 import { AppSharedModule } from '../app-shared/app-shared.module';
 
-
+/**
+ * The Cart Module For Cart Related Components
+ */
 @NgModule({
   declarations: [
+    /**
+     * These Two Components Are There For Showing the cart Items and Purchasing Items
+     */
     ShowCartComponent,
     PurchesesComponent,
   ],
   imports: [
     CommonModule,
     CartRoutingModule,
-    AppSharedModule,
-    MaterialModuleModule
+    AppSharedModule, //For Common Shared Module
+    MaterialModuleModule//For Material UI Features
   ]
 })
 export class CartModule { }

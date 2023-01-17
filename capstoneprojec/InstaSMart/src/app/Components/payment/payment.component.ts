@@ -69,6 +69,9 @@ export class PaymentComponent implements OnInit {
     setTimeout(()=>{this.LoadPayment = false;},3000); //Loading Payment True For three seconds during fetching user Data
   }
 
+  /**
+   * For Doing The Payment
+   */
   doPayment(){//For Doing The Payment
     this.DoPayment = true;
     this.Pservice.loadFromCart(); //Loading All The Items From The Current User cart

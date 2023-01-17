@@ -11,15 +11,19 @@ import { TestBed } from '@angular/core/testing';
 import { CartService } from '../Services/Cart.service';
 import { AppSharedModule } from '../Modules/app-shared/app-shared.module';
 
-
+/**
+ * Spec For Login Service
+ */
 
 describe('Login Service', () => {
   let service: LoginService;
-  let injector: TestBed;
   let currentUser:Users;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
+      /**
+       * Importing All The Needed Items
+       */
       imports: [
         MaterialModuleModule,
         AppSharedModule,
@@ -34,7 +38,11 @@ describe('Login Service', () => {
 
     }).compileComponents();
 
-   service= TestBed.inject(LoginService);
+   service= TestBed.inject(LoginService); //Creating The Service By Injection
+
+   /**
+    * Creating a user for testing
+    */
    currentUser = {
     id:101,
     address:"Kolkata",
@@ -56,14 +64,23 @@ describe('Login Service', () => {
 
   });
 
+  /**
+   * Should create the service
+   */
   it("Should Create",()=>{
     expect(service).toBeTruthy();
   });
 
+  /**
+   * Auto Logged In Must Not be activated
+   */
   it("Initially Should Not Logged In",()=>{
     expect(service.IsLoggedIn()).toBeFalse();
   });
 
+  /**
+   * If The User Is Logged In Successfully There Must Be Valid User
+   */
   it("Logged In Must Have a valid User",()=>{
     service.isLoggedIn = true;
     service.currentUser = currentUser;
@@ -71,6 +88,10 @@ describe('Login Service', () => {
     expect(service.currentUser).toEqual(currentUser);
   });
 
+
+  /**
+   * After Logged Out Successfully The LoggedIn User Must be demolished
+   */
   it("After Logout Current User Must Be Demolished",()=>{
     service.isLoggedIn = true;
     service.currentUser = currentUser;

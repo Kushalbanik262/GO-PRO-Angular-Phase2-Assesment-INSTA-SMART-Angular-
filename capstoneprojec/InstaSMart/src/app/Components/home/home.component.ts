@@ -21,6 +21,8 @@ import { Cart } from 'src/app/Entities/cart';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit,OnDestroy {
+
+  ////// Login Related Parameters ////////
   star:number = 4.5; //Dummy User Rating
   cartCount:number = 0; //Number of Products in cart
   searchText!:string; //placeholder for search text
@@ -56,18 +58,35 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.subscribe.unsubscribe();
   }
 
+  /**
+   *
+   * @returns Current Active UserId
+   */
   getLoginId(){ //For Getting The LogedIn Customer Id
     return this.Lservice.currentUser.id;
   }
 
+  /**
+   *
+   * @returns The Current Active User Previledge
+   */
   getPriviledge(){//Getting The Current Logged in user Priviledge
     return this.Lservice.getPriviledge();
   }
 
+
+  /**
+   *
+   * @returns The User IS Admin Or not
+   */
   isAdmin(){//Is the User Admin or not
     return this.getPriviledge() == "ADMIN";
   }
 
+  /**
+   *
+   * @returns is The User is Logged in or not
+   */
   isLoggedin(){ //Checking If the user logged in or not
     return this.Lservice.isLoggedIn;
   }
@@ -101,15 +120,15 @@ export class HomeComponent implements OnInit,OnDestroy {
     }
   }
 
+  /**
+   *
+   * @param data the product category
+   * @returns the product category String
+   */
   getCategory(data:productCat){ //Getting the product dategory
     return productCat[data];
   }
   ngOnInit(): void {
-
-    // if(this.Lservice.isLoggedIn){
-    //   this.Cservice.setCurrentCart(this.Lservice.getId());
-    // }
-
     this.searchText = `Search Your way ${this.Lservice.getName()}!`;
     this.store.dispatch(ProductLoad()); //Dispatching the loading product
     this.subscribe = this.store.subscribe((response)=>{ // And Subscribing it
@@ -125,17 +144,28 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.router.navigate(['showcart']);
   }
 
+  /**
+   *
+   * @param item type product to add it to the cart
+   */
   addToCart(item:Products){//Adding to the cart
     console.log("Trying To Add to Cart",item);
     this.Cservice.addCurrentCart(item);
     this.cartCount = this.Cservice.allCarts.length;
   }
 
-
+/**
+ *
+ * @param item To Explore more about the Specific Product
+ */
   explore(item:Products){//Exploring information about a specific product
       this.router.navigate(['product_details',item.id]); //Going to the specific product Page
   }
 
+  /**
+   *
+   * @param product TO Delete The Specific Product
+   */
   delete(product:Products){//Deleting a specific Product For admin usage only
     let pid = product.id;
     this.store.dispatch(ProductDelete({pid}));//Dispatching the Delete Product Feature

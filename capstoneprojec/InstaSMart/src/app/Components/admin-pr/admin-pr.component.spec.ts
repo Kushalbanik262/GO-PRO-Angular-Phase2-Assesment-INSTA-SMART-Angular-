@@ -8,6 +8,9 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { AdminPRComponent } from './admin-pr.component';
 
+/**
+ * Product Form Checking For Admin
+ */
 describe('Add Product Form By The Admin', () => {
   let component: AdminPRComponent;
   let fixture: ComponentFixture<AdminPRComponent>;
@@ -147,6 +150,7 @@ describe('Add Product Form By The Admin', () => {
     expect(component.frm.valid).toBeFalse();
   });
 
+
   it("Checking Details More Than 100 words",()=>{  //Form Must Be Invalid If Details is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
@@ -164,6 +168,9 @@ describe('Add Product Form By The Admin', () => {
     expect(component.frm.valid).toBeFalse();
   });
 
+   /**
+   * Button Checking
+   */
   it("Checking Button is disabled when the Form is Invalid",()=>{  //Checking Add/Update is disbled or not when the form is Invalid
     fixture.detectChanges();
     component.frm.setValue({
@@ -180,7 +187,9 @@ describe('Add Product Form By The Admin', () => {
     expect(fixture.nativeElement.querySelector("#add").disabled).toBeTrue();
   });
 
-
+ /**
+   * Button Checking
+   */
   it("Checking Button is not disabled when the Form is Valid",()=>{//Checking Add/Update is enabled or not when the form is valid
     fixture.detectChanges();
     component.frm.setValue({
@@ -197,6 +206,10 @@ describe('Add Product Form By The Admin', () => {
     expect(fixture.nativeElement.querySelector("#add").disabled).toBeFalse();
   });
 
+
+  /**
+   * Button Checking
+   */
   it("Checking Button is Update when Editable Option Is On",()=>{ //Checking Form is Rendering which option when user wants to update data
     fixture.detectChanges();
     component.frm.setValue({

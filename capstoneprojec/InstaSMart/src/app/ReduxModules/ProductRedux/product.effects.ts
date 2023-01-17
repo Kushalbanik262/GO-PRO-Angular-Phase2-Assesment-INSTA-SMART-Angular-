@@ -12,15 +12,27 @@ import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-
+/**
+ * The Product Effect
+ */
 @Injectable(
   {
     providedIn:"root"
   }
 )
 export class ProductEffects{
+  /**
+   *
+   * @param action$ The Action To listen store dispatches
+   * @param service The Product Service To Interact with Http protocols
+   * @param store The Store for state operations
+   */
   constructor(private action$:Actions,private service:ProductService,private store:Store<ProductState>){}
 
+
+  /**
+   * Loading The Products effect
+   */
   loadProducts$ = createEffect(()=>{ //Loading Products
     return this.action$.pipe(
       ofType(ProductLoad),
@@ -35,7 +47,9 @@ export class ProductEffects{
   });
 
 
-  //Saving Products by Creating the effect
+  /**
+   * Saving The Product Effects
+   */
   saveProducts$ = createEffect(()=>
     this.action$.pipe(
       ofType(ProductSave),
@@ -50,6 +64,9 @@ export class ProductEffects{
   );
 
 
+  /**
+   * For The Product Deletion
+   */
   deleteProduct$ = createEffect(()=>
   this.action$.pipe(
     ofType(ProductDelete),
@@ -64,6 +81,9 @@ export class ProductEffects{
 );
 
 
+/**
+ * For The Product Updation
+ */
   updateProduct$ = createEffect(()=>{
     return this.action$.pipe(
       ofType(ProductUpdate),

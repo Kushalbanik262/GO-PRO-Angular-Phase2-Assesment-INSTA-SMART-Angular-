@@ -10,13 +10,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaymentComponent } from './payment.component';
 
+/**
+ * Testing The Payment Component
+ */
 describe('Payment Component', () => {
   let component: PaymentComponent;
   let fixture: ComponentFixture<PaymentComponent>;
-  let mockToolBarService:any;
+  let demoLogin:any;
   let prodService:any;
+  /**
+   * Mocking The Product Service and Login Service and Injecting Them
+   */
   prodService =  jasmine.createSpyObj(['loadFromCart','addToPurchase']);
-  mockToolBarService = jasmine.createSpyObj(['getId','getName','getCurrent','getPriviledge','addToPurchase']);
+ demoLogin = jasmine.createSpyObj(['getId','getName','getCurrent','getPriviledge','addToPurchase']);
   let currentUser:Users;
 
   beforeEach(async () => {
@@ -30,13 +36,13 @@ describe('Payment Component', () => {
         BrowserAnimationsModule
       ],
       providers:[
-        { provide: LoginService, useValue: mockToolBarService },
+        { provide: LoginService, useValue:demoLogin },
         {provide: PurchaseService, useValue: prodService}
       ]
     })
     .compileComponents();
 
-    currentUser = {
+    currentUser = { //Setting Two Demo Current Users
 
         id:101,
         name:"Kushal Banik",
@@ -54,11 +60,17 @@ describe('Payment Component', () => {
         locked:false
       };
 
-    mockToolBarService.getCurrent.and.returnValue(currentUser);
-    mockToolBarService.getName.and.returnValue("Kushal Banik");
-    mockToolBarService.getId.and.returnValue(101);
-    mockToolBarService.getPriviledge.and.returnValue(currentUser.priviledge);
+    /**
+     * Login Service Mocking
+     */
+   demoLogin.getCurrent.and.returnValue(currentUser);
+   demoLogin.getName.and.returnValue("Kushal Banik");
+   demoLogin.getId.and.returnValue(101);
+   demoLogin.getPriviledge.and.returnValue(currentUser.priviledge);
 
+   /**
+    * Purchase Service Mocking
+    */
     prodService.loadFromCart.and.returnValue(true);
     prodService.addToPurchase.and.returnValue(true);
 
@@ -67,15 +79,15 @@ describe('Payment Component', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', () => { //Should Create The Component
     expect(component).toBeTruthy();
   });
 
-  it("Should Not Do payment Automatically",()=>{
+  it("Should Not Do payment Automatically",()=>{ //Payment Should Not be Done Automatically
     expect(component.DoPayment).toBeFalse();
   });
 
-  it("Payment Should Be Done When The Payment Button is Clicked",()=>{
+  it("Payment Should Be Done When The Payment Button is Clicked",()=>{ //Payment Should Be done after calling Payment
     component.LoadPayment = false;
     component.DoPayment = false;
     component.doPayment();

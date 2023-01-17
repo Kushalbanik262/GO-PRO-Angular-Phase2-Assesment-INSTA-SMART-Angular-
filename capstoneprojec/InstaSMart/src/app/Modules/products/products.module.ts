@@ -13,37 +13,34 @@ import { CommonModule } from '@angular/common';
 import { ProductsRoutingModule } from './products-routing.module';
 import { HomeComponent } from '../../Components/home/home.component';
 import { SpecProdComponent } from '../../Components/spec-prod/spec-prod.component';
-import { CategoryProdComponent } from '../../Components/category-prod/category-prod.component';
-import { ReviewProdComponent } from '../../Components/review-prod/review-prod.component';
-import { CUProductsComponent } from '../../Components/cuproducts/cuproducts.component';
 import { SalesOFTDComponent } from '../../Components/sales-oftd/sales-oftd.component';
 import { MaterialModuleModule } from '../material-module/material-module.module';
 import { AppSharedModule } from '../app-shared/app-shared.module';
 import { CartEffects } from 'src/app/ReduxModules/CartRedux/cart.effects';
 
+/**
+ * Product Module The Most Important Module Used For All The Operations
+ */
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeComponent,//The Root Component For Showing All The Products
     SpecProdComponent,
-    CategoryProdComponent,
-    ReviewProdComponent,
-    CUProductsComponent,
     SalesOFTDComponent
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    MaterialModuleModule,
+    MaterialModuleModule,//For Material UI Related Features
+    AppSharedModule,//The Custom Shared Module
+    HttpClientModule,//The HttpClient Module
+    FormsModule,//The template Driven Forms Module
+    StoreModule.forFeature("products",ProductReducer),//Featuring The Store Module for Product Reducers
+    StoreModule.forFeature("carts",cartReducer), //Featuring The CartsModule For Cart Reducer
+    StoreModule.forFeature("sales",SalesReducer),//Freaturing The Sales Module For Sales Reducer
+    EffectsModule.forFeature([ProductEffects,CartEffects,SalesEffect]),//Declearing The Effects Array For Product,Cart and Sales
     AppSharedModule,
-    HttpClientModule,
-    FormsModule,
-    StoreModule.forFeature("products",ProductReducer),
-    StoreModule.forFeature("carts",cartReducer),
-    StoreModule.forFeature("sales",SalesReducer),
-    EffectsModule.forFeature([ProductEffects,CartEffects,SalesEffect]),
-    AppSharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule//For Reactive Forms
   ]
 })
 export class ProductsModule { }

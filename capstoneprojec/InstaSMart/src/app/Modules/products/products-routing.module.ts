@@ -7,34 +7,37 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeComponent } from 'src/app/Components/home/home.component';
 
+/**
+ * The Clild Routes For All The Product Modules
+ */
 const routes: Routes = [
   {
-    path:"",
+    path:"", //Default Rendering The Home Component
     component:HomeComponent
   },
   {
-    path:"product_details/:id",
+    path:"product_details/:id", //For The Specific Product View Node Passing ID as parameter
     component:SpecProdComponent
   },
   {
-    path:"admin",
-    canActivate:[AdminGuardGuard],
+    path:"admin",//This is the specific Admin Page
+    canActivate:[AdminGuardGuard],//Protecting using The Admin part with Admin Guard
     component:AdminPRComponent
 
   },
   {
-    path:"showcart",
-    canActivate:[CustomerGuardGuard],
-    loadChildren:()=>import("../cart/cart.module").then(x=>x.CartModule)
+    path:"showcart", //Node for Showing All The Carts
+    canActivate:[CustomerGuardGuard], //Protecting Fpr The Valid Logged In Users Only Through The Customer Guard
+    loadChildren:()=>import("../cart/cart.module").then(x=>x.CartModule) //Lazily Loaded Module
   },
   {
-    path:"denied",
+    path:"denied", //The Access Denied Node
     component:AccessDeniedComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)], //Configuring For Routes Only
   exports: [RouterModule]
 })
 export class ProductsRoutingModule { }

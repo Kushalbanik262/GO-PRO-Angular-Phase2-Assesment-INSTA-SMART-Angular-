@@ -15,6 +15,7 @@ import { CartService } from 'src/app/Services/Cart.service';
  * This is Helper Navigation Component
  */
 export class HelperNavComponent implements OnInit,OnChanges {
+  ///////// Variables For Helper Nav Component /////////////////////
   cartCount:number = 0; //Number of Products in cart
   star:number = 4.5; //Dummy User Rating
   searchOption:string = ""; //Searching Options
@@ -28,6 +29,7 @@ export class HelperNavComponent implements OnInit,OnChanges {
    * @param store this is redux store
    */
   constructor(private router:Router,private Lservice:LoginService,private Cservice:CartService,private store:Store<any>){}
+
   ngOnInit(): void {
     this.store.select(CartLoadingSuccessful).subscribe(//Subscribing to the cart for getting any changes realtime
       {
@@ -38,6 +40,11 @@ export class HelperNavComponent implements OnInit,OnChanges {
   ngOnChanges(){ //Change Detection purpose [Not Used]
 
   }
+
+  /**
+   *
+   * @returns IS The User is logged in or not
+   */
   isLoggedin(){ //Checking If the user logged in or not
     return this.Lservice.IsLoggedIn();
   }
@@ -46,6 +53,10 @@ export class HelperNavComponent implements OnInit,OnChanges {
     this.router.navigate(['showcart']);
   }
 
+  /**
+   *
+   * @returns Getting The User priviledge
+   */
   isAdmin(){ //checking if its admin or not
     return this.Lservice.getPriviledge() == UserPriviledges.ADMIN;
   }

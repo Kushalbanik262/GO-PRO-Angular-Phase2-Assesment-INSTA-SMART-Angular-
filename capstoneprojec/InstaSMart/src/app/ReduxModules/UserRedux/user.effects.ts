@@ -6,13 +6,24 @@ import {Injectable} from "@angular/core";
 import { Actions, ofType,createEffect } from "@ngrx/effects";
 import { mergeMap } from 'rxjs';
 
+/**
+ * All The Effects Related to the user
+ */
 
 @Injectable({
   providedIn:"root"
 })
 export class UserEffects{
+  /**
+   *
+   * @param service The User Service for user Related HTTP operations
+   * @param actions$ The Actions For getting the store dispatches
+   */
   constructor(private service:UserService,private actions$:Actions){}
 
+  /**
+   * The Load User Effects
+   */
   loadUsers$ = createEffect(()=>{
     return this.actions$.pipe(
       ofType(UserLoading),

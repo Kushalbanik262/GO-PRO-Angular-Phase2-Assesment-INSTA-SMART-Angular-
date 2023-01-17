@@ -1,3 +1,6 @@
+/**
+ * All The Product Categories
+ */
 export enum productCat{
     Daily,
     LifeStyle,
@@ -8,12 +11,18 @@ export enum productCat{
     HomeAppliences
 }
 
-
+/**
+ * Review Interface FOr The Reviews
+ */
 export interface Reviews{
     image:string,
     content:string
 }
 
+
+/**
+ * The Main Product Interface
+ */
 export interface Products{
     id:number,
     name:string,

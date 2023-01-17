@@ -13,6 +13,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class CustomerGuardGuard implements CanActivate { //Implementing the CanActivate interface
+  /**
+   *
+   * @param service Login Service To Get Currently Logged In Data
+   * @param router Router Object For Routing To specific Page
+   * @param snack  MatSnackBar To Show Popup
+   */
   constructor(private service:LoginService,private router:Router,private snack:MatSnackBar){} //Dependency Injecting The LoginService and Router
   canActivate(
     route: ActivatedRouteSnapshot,

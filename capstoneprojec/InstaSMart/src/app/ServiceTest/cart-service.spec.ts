@@ -11,11 +11,17 @@ import { TestBed } from '@angular/core/testing';
 import { CartService } from '../Services/Cart.service';
 import { AppSharedModule } from '../Modules/app-shared/app-shared.module';
 
-
+/**
+ * Testing Spec For Cart Service
+ */
 
 describe('Cart Service For Adding and Deleting The Cart', () => {
   let service: CartService;
   let injector: TestBed;
+  /**
+   * Creating Two Dummy Products
+   */
+
   let product1:Products = {
     id:101,
     category:productCat.Daily,
@@ -41,6 +47,10 @@ describe('Cart Service For Adding and Deleting The Cart', () => {
     reviews:[]
   };
   beforeEach(async() => {
+
+    /**
+     * Importing All The Necessary Modules Needed for Testing
+     */
     await TestBed.configureTestingModule({
       imports: [
         MaterialModuleModule,
@@ -57,14 +67,20 @@ describe('Cart Service For Adding and Deleting The Cart', () => {
 
     }).compileComponents();
 
-   service= TestBed.inject(CartService)
+   service= TestBed.inject(CartService) //Injecting The Service Through TestBed
   });
 
-
+  /**
+   * The Component Should Be created
+   */
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
+
+  /**
+   * Adding Product To The Cart Then Cart Must Be Increased
+   */
   it("Adding to the cart Should Be Cart Increased",()=>{
 
     let sz:number = 0;
@@ -74,6 +90,9 @@ describe('Cart Service For Adding and Deleting The Cart', () => {
   });
 
 
+  /**
+   * Adding Same Product Will Not Increase Cart Count Will Increase Frequency Count
+   */
   it("Adding Same Value to The cart",async()=>{
     let sz:number = 0;
     service.addCurrentCart(product1);
@@ -83,6 +102,9 @@ describe('Cart Service For Adding and Deleting The Cart', () => {
     expect(service.allCarts.length).toBe(sz);
   });
 
+  /**
+   * Adding Different Product Will  Increase Cart Count
+   */
   it("Adding Different  Value to The cart",async()=>{
     let sz:number = 0;
     service.addCurrentCart(product1);
