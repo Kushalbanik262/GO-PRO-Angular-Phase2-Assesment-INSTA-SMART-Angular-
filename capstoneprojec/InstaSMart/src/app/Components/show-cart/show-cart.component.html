@@ -39,7 +39,9 @@
                 {{getTotal(item) | currency:"INR"}}
               </td>
               <td>
-                <button (click)="remove(item)" class="btn btn-outline-danger rounded-circle">Remove</button>
+                <button (click)="remove(item)" mat-raised-button>Remove
+                  <mat-icon color="warn" matSuffix>remove_shopping_cart</mat-icon>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -69,7 +71,7 @@
                 </tr>
                 <tr>
                   <td>Total Amount</td>
-                  <td>{{(total + calculateGst()) + 40 | currency : "INR"}}</td>
+                  <td>{{sumTotalInc() | currency : "INR"}}</td>
                 </tr>
               </tbody>
             </table>
@@ -94,7 +96,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Total Price: {{total | currency : "INR"}}</p>
+        <p>Total Price: {{sumTotalInc() | currency : "INR"}}</p>
       </div>
       <div class="modal-footer">
         <button  mat-raised-button class="success" data-bs-dismiss="modal" (click)="checkout()">Procced For Payment</button>

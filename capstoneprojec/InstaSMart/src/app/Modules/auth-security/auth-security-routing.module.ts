@@ -4,20 +4,22 @@ import { LoginComponent } from './../../Components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
+
 const routes: Routes = [
   {
-    path:"",
+    path:"", //Root Path For Login
     component:LoginComponent
   },
   {
-    path:"payment/:price",
+    path:"payment/:price", //Payment With price in path parameter
     component:PaymentComponent,
     pathMatch:"full"
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)], //This is Used For child Ruutes
   exports: [RouterModule]
 })
 export class AuthSecurityRoutingModule { }

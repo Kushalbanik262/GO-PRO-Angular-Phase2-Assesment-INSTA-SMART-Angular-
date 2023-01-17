@@ -10,42 +10,33 @@ import { Router } from '@angular/router';
 export class ContactUsComponent implements OnInit {
 
 
-  frm = new FormGroup({
-    firstname:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
-    lastName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]),
-    phn:new FormControl('',[Validators.required,Validators.pattern("[789][0-9]{9}")]),
-    store:new FormControl('Fresh Mart',[Validators.required]),
-    address:new FormControl('',[]),
-    comments:new FormControl('',[])
+  frm = new FormGroup({ //This is The formcontrol for contact Us Form
+    firstname:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]), //Having Firstname
+    lastName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]+$')]), //Having LastName
+    phn:new FormControl('',[Validators.required,Validators.pattern("[789][0-9]{9}")]), //Having Phone number
+    store:new FormControl('Fresh Mart',[Validators.required]), //Having the default store selected as 'Fresh Mart'
+    address:new FormControl('',[]),//Having the address a field
+    comments:new FormControl('',[])//Having a comment section
   });
 
-  timerFlag:boolean = true;
+  timerFlag:boolean = true; //this is simple loader flag
 
-  constructor(private router:Router) {this.timerFlag = false; }
+  constructor(private router:Router) {this.timerFlag = false; } //At Component Creation Time Setting timerFlag false
   ngOnInit(): void {
-     setInterval(()=>{this.timerFlag = true;},1000);
+     setInterval(()=>{this.timerFlag = true;},1000); //Making The loader flag for one second
   }
-  // ngAfterViewChecked(): void {
-  //   console.log(this.frm);
-  // }
 
-
-  // ngOnInit(): void {
-  //   this.timerFlag = true;//Setting Initially False In loading Mode
-  //   console.log("Inited The Component");
-  //  //setInterval(()=>{this.timerFlag = true},1200); //creating custom loader
-  // }
 
   submit(){ //The Contact Us Submitted Data
     console.log("The Contact Us submitted data is:",this.frm.value);
   }
 
-  mdlClose(){
+  mdlClose(){//The modal closing and redirecting to the home page
     console.log("Closing Modal");
     this.router.navigateByUrl("");
   }
 
-  getForm(){
+  getForm(){ //Getting the form
     return this.frm?.value;
   }
 }

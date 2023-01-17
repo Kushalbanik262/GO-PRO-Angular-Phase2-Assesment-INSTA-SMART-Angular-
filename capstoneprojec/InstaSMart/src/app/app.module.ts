@@ -24,26 +24,36 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavBarComponent,
-    AboutUSComponent,
-    ContactUsComponent,
-    NotFoundComponent,
-    AccessDeniedComponent
+    AppComponent, //Main App Component
+    NavBarComponent, //The Main Navbar
+    AboutUSComponent, //AboutUs component
+    ContactUsComponent, //Contact Us Component
+    NotFoundComponent, //The 404 Not Found Page
+    AccessDeniedComponent //For the Specific Access Denied Page
   ],
+  //**Things We are importing */
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModuleModule,
-    AppSharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    StoreModule.forRoot({}),
-     HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApi),
-    HttpClientModule,
-    EffectsModule.forRoot([AppEffects]),
-    StoreDevtoolsModule.instrument()
+    BrowserModule,//The Browser Module
+    AppRoutingModule, //The Main Router Module
+    BrowserAnimationsModule, //Browser Animation Module Here
+    MaterialModuleModule, //The Specific Module For Importing all the Material UI related Components
+    AppSharedModule,//This is a custom Shared Module Which Shares The Data To other Modules
+    FormsModule,//For Template Driven Forms
+    ReactiveFormsModule,//For Reactive Forms
+
+    /*
+     * Setting The Redux (NGRX) Features For The Root Part
+     */
+    StoreModule.forRoot({}),// Setting The Store Root
+    EffectsModule.forRoot([AppEffects]),//This is the Effects Module With Root configration
+    StoreDevtoolsModule.instrument(),//Setting The Redux Devtools Configuration
+
+    /*
+     *The Http Service Configuration
+     */
+    HttpClientModule, //The main Client Module
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryWebApi),//As We are using in memory web api we are using this
+    //and this 'InMemoryWebApi' is the speccific class which implements the 'InMemoryDbService' interface and the service is coming from that
   ],
   providers: [],
   bootstrap: [AppComponent]

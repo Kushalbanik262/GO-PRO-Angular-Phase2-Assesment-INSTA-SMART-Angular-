@@ -15,24 +15,27 @@ import { AdminPRComponent } from '../../Components/admin-pr/admin-pr.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-
+/**
+ * This Module is Used For All Secure Operations
+ * Like Payment and Login
+ */
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    AdminPRComponent,
-    PaymentComponent,
+    LoginComponent, //The Login Component
+    AdminPRComponent, //Admin ControlComponent
+    PaymentComponent,// The Payment Component
   ],
   imports: [
     CommonModule,
     AuthSecurityRoutingModule,
-    HttpClientModule,
-    MaterialModuleModule,
-    FormsModule,
-    StoreModule.forFeature("users",UserReducer),
-    EffectsModule.forFeature([UserEffects]),
+    HttpClientModule,//For Http Operations
+    MaterialModuleModule, //The Module For Using MaterialModules
+    FormsModule,//For Template Driven Forms
+    StoreModule.forFeature("users",UserReducer), //Giving The Features For User Reducer as This is Loading in this Module Component
+    EffectsModule.forFeature([UserEffects]),//Giving The Features For User Effects
     AppSharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule //Using Reactive Forms Here
 
   ]
 })

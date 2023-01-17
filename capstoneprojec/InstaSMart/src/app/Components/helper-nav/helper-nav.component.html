@@ -1,12 +1,15 @@
+<!-- This is a special Helper Navigation Which Will Be Enabled when the User Is Logged In -->
+
 <div class="container-fluid" *ngIf="isLoggedin()" id="helperNav">
   <div class="navbar navbar-expand navbar-light bg-primary rounded">
-    <div class="navbar-brand">
-      <app-star [star] = "star"></app-star>
+    <div class="navbar-brand p-2">
+      <app-star [star] = "star" *ngIf="!isAdmin()"></app-star>
+      <div class="bg-danger text-light p-3 border border-light rounded-2" id="admin" *ngIf="isAdmin()">Admin</div>
     </div>
     <div class="container">
 
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isAdmin()">
             <a class="nav-link text-light"><mat-icon matPrefix>grade</mat-icon>Offers For You  </a>
           </li>
           <li class="nav-item">
@@ -17,7 +20,7 @@
               <mat-icon matPrefix>local_offer</mat-icon>Sales Of the Day
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isAdmin()">
             <a [routerLink]="['/showcart/purchases']" class="nav-link text-light">
               <mat-icon matPrefix>history</mat-icon>
               Your Purchases
@@ -29,7 +32,8 @@
         </ul>
       </div>
       <div class="mx-7">
-        <div class="mx-auto">
+        <!-- cart will be shown if the user is Admin -->
+        <div class="mx-auto" *ngIf="!isAdmin()">
           <button (click)="routeCart()" mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
             Cart <mat-icon matSuffix>shopping_cart</mat-icon>
         </button>

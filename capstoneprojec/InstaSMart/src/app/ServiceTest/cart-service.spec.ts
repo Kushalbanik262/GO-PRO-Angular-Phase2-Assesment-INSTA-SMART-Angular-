@@ -13,7 +13,7 @@ import { AppSharedModule } from '../Modules/app-shared/app-shared.module';
 
 
 
-xdescribe('Cart Service For Adding and Deleting The Cart', () => {
+describe('Cart Service For Adding and Deleting The Cart', () => {
   let service: CartService;
   let injector: TestBed;
   let product1:Products = {

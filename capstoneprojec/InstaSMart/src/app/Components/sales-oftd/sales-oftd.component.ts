@@ -10,18 +10,21 @@ import { Component, OnInit,AfterViewChecked } from '@angular/core';
 })
 export class SalesOFTDComponent implements OnInit,AfterViewChecked {
 
-  sales!:sales[];
+  sales!:sales[]; //All The Sales Needed to be rendered
+  /**
+   * @param store The Ngrx Store For Redux Operations
+   */
   constructor(private store:Store<any>) { }
   ngAfterViewChecked(): void {
-    console.warn("Sales After view Checked",this.sales);
+    // console.warn("Sales After view Checked",this.sales);
   }
 
   ngOnInit(): void {
-    this.store.dispatch(SalesLoading());
-    let subscribe = this.store.subscribe(
+    this.store.dispatch(SalesLoading()); //Dispatching the store for loading all the sales
+    let subscribe = this.store.subscribe(//Subscribing to The method
       {
         next:(response)=>{console.log("Response From sales store:",response);this.sales = response.sales.sales; console.log("All Sales Are:",this.sales);}
-      }
+      } //Assigning The Response Directly to the sales
     )
     //subscribe.unsubscribe();
     console.log("All Sales Are:",this.sales);

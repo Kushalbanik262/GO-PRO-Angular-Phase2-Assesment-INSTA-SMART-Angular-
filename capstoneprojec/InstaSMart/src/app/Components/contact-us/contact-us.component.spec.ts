@@ -35,18 +35,18 @@ describe('Contact US Form', () => {
   });
 
 
-  it('should create', () => {
+  it('should create', () => { //The contact Us page must be created
     expect(component).toBeTruthy();
   });
 
-  it("The Form Must Be Initialized",()=>{
+  it("The Form Must Be Initialized",()=>{ //The contact Us Form Must Be rendered successfully
     fixture = TestBed.createComponent(ContactUsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component.frm).toBeTruthy();
   });
 
-  it("Testing Form Validation with all the Valid Fields",()=>{
+  it("Testing Form Validation with all the Valid Fields",()=>{//The Form Must BE Valid When All The fields Entered is valid
     fixture.detectChanges();
 
     component.frm.setValue({
@@ -62,7 +62,7 @@ describe('Contact US Form', () => {
     expect(component.frm.valid).toBeTruthy();
   });
 
-  it("Testing Form Validation with name InValid Fields",()=>{
+  it("Testing Form Validation with name InValid Fields",()=>{ //The Form Must Be Invalid when the name is Invalid
     fixture.detectChanges();
 
     component.frm.setValue({
@@ -80,14 +80,14 @@ describe('Contact US Form', () => {
 
 
 
-  it("Testing Form Validation with phn with charecters",()=>{
+  it("Testing Form Validation with phn with charecters",()=>{//The Form Must Be Invalid when the phn number is Invalid
     fixture.detectChanges();
 
     component.frm.setValue({
       firstname:"Kushal14",
       lastName:"Banik74",
       address:"Kolkata",
-      phn:"7980859rf3",
+      phn:"7980859rf3",// chatecters are given in phn number
       comments:"All Services Are Good!",
       store:"Fresh Mart"
     });
@@ -98,14 +98,14 @@ describe('Contact US Form', () => {
 
 
 
-  it("Testing Form Validation with phone InValid Field",()=>{
+  it("Testing Form Validation with phone InValid Field",()=>{//The Form Must Be Invalid when the phn number is Invalid
     fixture.detectChanges();
 
     component.frm.setValue({
       firstname:"Kushal",
       lastName:"Banik",
       address:"Kolkata",
-      phn:"798085930",
+      phn:"798085930",//Not having ten numbers
       comments:"All Services Are Good!",
       store:"Fresh Mart"
     });
@@ -114,7 +114,7 @@ describe('Contact US Form', () => {
     expect(component.frm.valid).toBeFalsy();
   });
 
-  it("Testing Form Validation with all InValid Fields",()=>{
+  it("Testing Form Validation with all InValid Fields",()=>{//When All The fields Are Invalid
     fixture.detectChanges();
 
     component.frm.setValue({
@@ -130,7 +130,7 @@ describe('Contact US Form', () => {
     expect(component.frm.valid).toBeFalsy();
   });
 
-  it("Button Should Be Disabled When the form is Invalid",()=>{
+  it("Button Should Be Disabled When the form is Invalid",()=>{ //The Submit button Must Be disabled When the Form is Invalid
     fixture.detectChanges();
 
     component.frm.setValue({
@@ -146,7 +146,7 @@ describe('Contact US Form', () => {
     expect(fixture.nativeElement.querySelector("#btn").disabled).toBeTruthy();
   });
 
-  it("Button Should Be Enabled When the form is Valid",()=>{
+  it("Button Should Be Enabled When the form is Valid",()=>{ //The Submit Button Must Be Enabled When The Form Is valid
     fixture.detectChanges();
 
     component.frm.setValue({
@@ -165,7 +165,7 @@ describe('Contact US Form', () => {
 
 
 
-  it("Checking All The Required Fields To Be True",()=>{
+  it("Checking All The Required Fields To Be True",()=>{ //All the Required FIelds Must Be Given Else Form will not Valid
     fixture.detectChanges();
 
     component.frm.setValue({

@@ -13,7 +13,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductMap, ShowCartComponent } from './show-cart.component';
 
-xdescribe('ShowCartComponent', () => {
+describe('ShowCartComponent', () => {
   let component: ShowCartComponent;
   let fixture: ComponentFixture<ShowCartComponent>;
 

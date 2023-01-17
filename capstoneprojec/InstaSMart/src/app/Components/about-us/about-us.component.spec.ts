@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AboutUSComponent } from './about-us.component';
 
-xdescribe('AboutUSComponent', () => {
+describe('AboutUSComponent', () => {
   let component: AboutUSComponent;
   let fixture: ComponentFixture<AboutUSComponent>;
 
@@ -17,14 +17,14 @@ xdescribe('AboutUSComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', () => {// Checking If The Component is Created Or not
     expect(component).toBeTruthy();
   });
 
-  it("Should Be The Name About Us",()=>{
+  it("Should Be The Name About Us",()=>{ //Checking If it's Rendering with appropiate title or not
     fixture = TestBed.createComponent(AboutUSComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.querySelector("#title").textContent).toContain("Know More About Us");
+    expect(fixture.debugElement.nativeElement.querySelector("#title").textContent).toContain("Know More About Us"); //Checking the title format
   })
 });

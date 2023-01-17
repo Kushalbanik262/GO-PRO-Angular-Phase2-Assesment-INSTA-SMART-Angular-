@@ -9,24 +9,27 @@ import { LoginService } from 'src/app/Services/Login.service';
 export class NavBarComponent implements OnInit {
 
 
-
+  /**
+   *
+   * @param service Using Login Service to Get Currenty Login User Details
+   */
 
   constructor(private service:LoginService) { }
 
   ngOnInit(): void {
   }
 
-  isLoggedIn(){
+  isLoggedIn(){ //Is Any user is Logged in or not
     return this.service.IsLoggedIn();
   }
 
 
-  getName(){
+  getName(){//Getting The Name
     return this.service.getName();
   }
 
-  logout(){
-    alert("You Want to Logout?");
+  logout(){//Trying to Logout
+    alert("You Want to Logout?");//Alert Asking For Logout
     this.service.logout();
   }
 

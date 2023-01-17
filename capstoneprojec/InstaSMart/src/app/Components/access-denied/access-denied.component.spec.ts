@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccessDeniedComponent } from './access-denied.component';
 
-xdescribe('AccessDeniedComponent', () => {
+describe('AccessDeniedComponent', () => {
   let component: AccessDeniedComponent;
   let fixture: ComponentFixture<AccessDeniedComponent>;
 
@@ -17,7 +17,7 @@ xdescribe('AccessDeniedComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', () => {  //Should Create The Component
     expect(component).toBeTruthy();
   });
 });

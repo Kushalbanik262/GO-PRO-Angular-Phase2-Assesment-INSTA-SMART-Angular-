@@ -17,20 +17,24 @@ interface credentials{
 })
 export class LoginComponent implements OnInit,OnChanges {
 
-  loginFlag:boolean = false;
+  loginFlag:boolean = false; //Loader For Login Flag
+  /**
+   *
+   * @param service For Loginservice it is used
+   */
   constructor(private service:LoginService) { }
 
   ngOnInit(): void {}
 
-  ngOnChanges(){
+  ngOnChanges(){ //For Detecting The Changes
     console.log("View Changed");
     if(this.loginFlag){this.loginFlag = false;}
   }
-  tryLogin(data:credentials){
+  tryLogin(data:credentials){ //Trying to Login With User entered credentials
     console.log("Trying With Credentials:",data);
     this.loginFlag = true;
-    setTimeout(()=>{this.loginFlag = false},4000);
-    this.service.login(data.username,data.password);
+    setTimeout(()=>{this.loginFlag = false},4000);//Making Login flag True for 4 secs after trying to login
+    this.service.login(data.username,data.password);//Calling Login Service with login method
   }
 
 }

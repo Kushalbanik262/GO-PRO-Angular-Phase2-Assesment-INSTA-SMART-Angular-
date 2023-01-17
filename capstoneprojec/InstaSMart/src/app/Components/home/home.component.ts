@@ -32,6 +32,16 @@ export class HomeComponent implements OnInit,OnDestroy {
   subscribe!:Subscription;
 
 
+/**
+ *
+ * @param router for Routing Feature
+ * @param Lservice The Login service information
+ * @param Pservice The Product Service Part
+ * @param store The Store o f Redux
+ * @param snack Material UI Snackbar
+ * @param Cservice The cart Service
+ */
+
   constructor(
     private router:Router,
     private Lservice:LoginService,
@@ -41,20 +51,20 @@ export class HomeComponent implements OnInit,OnDestroy {
     private Cservice:CartService,
     ){}
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void { //Unsubscribing when the component is destroyes
     console.warn("Unsubscribing From Home");
     this.subscribe.unsubscribe();
   }
 
-  getLoginId(){
+  getLoginId(){ //For Getting The LogedIn Customer Id
     return this.Lservice.currentUser.id;
   }
 
-  getPriviledge(){
+  getPriviledge(){//Getting The Current Logged in user Priviledge
     return this.Lservice.getPriviledge();
   }
 
-  isAdmin(){
+  isAdmin(){//Is the User Admin or not
     return this.getPriviledge() == "ADMIN";
   }
 
@@ -71,16 +81,15 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.fProductArr = [];
     this.productsArr.forEach(
       (response:Products)=>{
-        console.log(response,response.name.includes(this.searchKey));
-        switch(this.searchOption){
+        switch(this.searchOption){ //If Those Search keywords Are included or not
           case "name":
-              if(response.name.includes(this.searchKey)){this.fProductArr.push(response);}
+              if(response.name.includes(this.searchKey)){this.fProductArr.push(response);} //By Name
               break;
           case "category":
-              if(productCat[response.category].includes(this.searchKey)){this.fProductArr.push(response);}
+              if(productCat[response.category].includes(this.searchKey)){this.fProductArr.push(response);}//By category
               break;
           case "price":
-              if(response.price < parseInt(this.searchKey)){this.fProductArr.push(response);}
+              if(response.price < parseInt(this.searchKey)){this.fProductArr.push(response);}// By Price
               break;
           default:
               this.fProductArr = this.productsArr;
@@ -88,7 +97,7 @@ export class HomeComponent implements OnInit,OnDestroy {
       }
     )
     if(this.fProductArr.length == 0){
-      this.snack.open("Sorry No Item Matched You Searched","OK");
+      this.snack.open("Sorry No Item Matched You Searched","OK"); //No Items are matched
     }
   }
 
@@ -102,35 +111,35 @@ export class HomeComponent implements OnInit,OnDestroy {
     // }
 
     this.searchText = `Search Your way ${this.Lservice.getName()}!`;
-    this.store.dispatch(ProductLoad()); //Loading The product On Init
+    this.store.dispatch(ProductLoad()); //Dispatching the loading product
     this.subscribe = this.store.subscribe((response)=>{ // And Subscribing it
       console.log("Response Coming From DIspatch Store Home Products:",response);
-      this.productsArr = response.products.products;
-      this.fProductArr = response.products.products;
+      this.productsArr = response.products.products; //Storing int the ProductArray
+      this.fProductArr = response.products.products; //Storing in the filtered product array currently
       if(this.productsArr.length > 0){this.loaded = true;}
     });
-    this.cartCount = this.Cservice.allCarts.length;
+    this.cartCount = this.Cservice.allCarts.length; //Total Number Of Items in the Cart
   }
 
-  routeCart(){
+  routeCart(){ //FOr Routing to the ShowCart Function
     this.router.navigate(['showcart']);
   }
 
-  addToCart(item:Products){
+  addToCart(item:Products){//Adding to the cart
     console.log("Trying To Add to Cart",item);
     this.Cservice.addCurrentCart(item);
     this.cartCount = this.Cservice.allCarts.length;
   }
 
 
-  explore(item:Products){
+  explore(item:Products){//Exploring information about a specific product
       this.router.navigate(['product_details',item.id]); //Going to the specific product Page
   }
 
-  delete(product:Products){
+  delete(product:Products){//Deleting a specific Product For admin usage only
     let pid = product.id;
-    this.store.dispatch(ProductDelete({pid}));
-    this.store.subscribe(
+    this.store.dispatch(ProductDelete({pid}));//Dispatching the Delete Product Feature
+    this.store.subscribe( //Deletion response
       {
         next:(response)=>{console.warn("Deleting The Product ",response);}
       }

@@ -1,3 +1,4 @@
+<!-- This is The Home Page For Rendering All The Products -->
 <div class="container-fluid" *ngIf="isLoggedin()">
   <div class="navbar navbar-expand navbar-light bg-primary rounded">
     <div class="navbar-brand p-2">
@@ -19,7 +20,7 @@
               <mat-icon matPrefix>local_offer</mat-icon>Sales Of the Day
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isAdmin()">
             <a [routerLink]="['/showcart/purchases']" class="nav-link text-light">
               <mat-icon matPrefix>history</mat-icon>
               Your Purchases
@@ -43,7 +44,7 @@
           </li>
         </ul>
       </div>
-      <div class="mx-7">
+      <div class="mx-7" *ngIf="!isAdmin()">
         <div class="mx-auto">
           <button (click)="routeCart()" mat-raised-button [matBadge]="cartCount" class="btn btn-outline-success">
             Cart <mat-icon matSuffix>shopping_cart</mat-icon>
@@ -54,8 +55,13 @@
     </div>
   </div>
 <div class="display-3 text-center text-secondary">Check Our Awaited Sales!!! <mat-icon matPrefix>accessibility</mat-icon></div>
+
+
+<!-- Sales Rendering -->
 <app-sales-oftd></app-sales-oftd>
 
+
+<!-- All The Products Are displayed Here -->
 <div class="container-fluid p-2 my-4">
   <div class="text-center display-6 my-2">Check Our Exiting Products <mat-icon>business</mat-icon></div>
     <div class="row">

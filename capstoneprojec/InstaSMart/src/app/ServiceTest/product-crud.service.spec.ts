@@ -9,7 +9,7 @@ import { ProductService } from '../Services/Products.service';
 
 
 
-xdescribe('ProductCrudService', () => {
+describe('ProductCrudService', () => {
   let service: ProductService;
   let injector: TestBed;
   let httpMock: HttpTestingController;

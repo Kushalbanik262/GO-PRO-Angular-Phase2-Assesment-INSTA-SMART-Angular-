@@ -1,15 +1,38 @@
-<div class="display-3 text-center text-success">Your Purchased Items <mat-icon matSuffix>donut_large</mat-icon></div>
-<div class="container my-4 shadow shadow-lg">
-
-<div class="row shadow shadow-sm my-3 rounded p-3" *ngFor="let item of getAllPurchases().products">
-  <div class="col-md-1">
-    <span class="text-center my-auto">{{item.name}}</span>
+<!-- Page To Show All The Purchases -->
+<app-helper-nav></app-helper-nav>
+<div class="text-info text-center h3" *ngIf="getProductSize() == 0">Woops {{getName()}} You Haven't purchased Anything Yet!!</div>
+<div class="display-3 text-center text-success" *ngIf="getProductSize() > 0">Your Purchased Items <mat-icon matSuffix>donut_large</mat-icon></div>
+<div class="container" *ngIf="getProductSize() == 0">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="container">
+        <button mat-raised-button class="mx-auto" [routerLink]="['/showcart']">Go To Cart
+          <mat-icon>show_chart</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
   </div>
-  <div class="col-md-3">
+</div>
+<div class="container my-4 shadow shadow-lg" *ngIf="getProductSize() > 0">
+<div class="row my-2">
+  <div class="col-md-12">
+    <span class="text-success h4 mx-auto"> {{getAddress()}} <mat-icon matIconSuffix>location_on</mat-icon></span>
+   </div>
+</div>
+<div class="row shadow shadow-sm my-3 rounded p-3" *ngFor="let item of getAllPurchases().products">
+  <div class="col-md-2">
+    <span class="text-center my-auto h4">{{item.name}}</span>
+  </div>
+  <div class="col-md-2">
     <img [src]="item.image[0]" alt="#" style="height: 200px; width: 50%;">
   </div>
-  <div class="col-md-4">
-    <div class="my-auto">{{item.price | currency : "INR"}}</div>
+  <div class="col-md-2">
+    <div class="my-auto h3">{{item.price | currency : "INR"}}</div>
+  </div>
+  <div class="col-md-2">
+    <span class="text-info">Payment Done Online </span><mat-icon>credit_card</mat-icon>
   </div>
   <div class="col-md-4">
     <span class="text-center mx-auto text-info">Updated On: <span class="text-warning">{{getAllPurchases().updated | uppercase}}
@@ -17,11 +40,11 @@
      </span>
      </span>
      <div class="bg-success my-2 text-light shadow shadow-sm rounded rounded-3 p-4">
-      Order Placed <mat-icon matSuffix>add_location</mat-icon>
+      Order Placed
       In Transit <mat-icon matSuffix>track_changes</mat-icon></div>
      <div class="container">
       <mat-icon matPrefix>timeline</mat-icon>
-        <div>Expected Delivery:<span class="text-center text-info">02/02/2022</span></div>
+        <div class="text-info">Expected Delivery On:<span class="text-center text-warning">02/02/2022</span></div>
      </div>
     </div>
 </div>

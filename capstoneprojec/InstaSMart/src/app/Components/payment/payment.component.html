@@ -1,3 +1,4 @@
+<!-- This is A dummy Payment Page For User Payment -->
 <div class="text-center display-4 my-3 text-info">
   Welcome {{ name }} to our secure payment system
 </div>
@@ -10,6 +11,7 @@
     </div>
     <div class="col-md-10" *ngIf="!LoadPayment">
       <mat-tab-group animationDuration="1000ms">
+        <!-- Personal Information Page -->
         <mat-tab label="Personal Information">
           <table class="table table-responsive mx-auto">
             <tbody >
@@ -44,6 +46,7 @@
           <div class="container my-3 mx-auto">
             <div class="row">
               <div class="col-md-8">
+                <!-- Card Holder Information Page -->
               <div class="form-group">
                 <label for="holder" class="form-label">CARD Holder Name</label>
                 <input type="text" class="mb-2 form-control" disabled [value]="name">
@@ -80,6 +83,7 @@
         </mat-tab>
         <mat-tab label="Confirm and Pay">
           <div class="card p-4">
+            <!-- Payment Confirmation Page -->
             <div class="card-header text-center">
                   Payment Confirmation
             </div>
@@ -87,7 +91,7 @@
             <div class="card-body"  *ngIf="!DoPayment">
               <div class="card-title form-text text-warning"><span class="text-warning display-3">We Make Your Payment Safe</span></div>
               <div class="card-title">Amount :<span class="text-danger"> {{amount | currency : "INR"}}</span></div>
-              <button (click)="doPayment()" mat-raised-button color="primary" class="mx-2">Pay</button>
+              <button id="pay" (click)="doPayment()" mat-raised-button color="primary" class="mx-2">Pay</button>
               <button mat-raised-button color="warn" [routerLink]="['/showcart']" class="mx-2">Cancel</button>
            </div>
            <div class="card-body"  *ngIf="DoPayment">

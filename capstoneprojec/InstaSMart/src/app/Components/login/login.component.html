@@ -27,7 +27,7 @@
       <mat-spinner [style.display]="loginFlag ? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="!frm.valid" mat-raised-button type="submit"  color="primary">Login</button>
+      <button [disabled]="!frm.valid" mat-raised-button type="submit"  color="primary" *ngIf="!loginFlag">Login</button>
     </mat-card-actions>
   </form>
   </mat-card>

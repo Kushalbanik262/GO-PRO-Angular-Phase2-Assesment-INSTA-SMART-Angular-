@@ -1,22 +1,30 @@
+<!-- This is The Page Related to Product Crud Operations Only For Admins  -->
 <app-helper-nav></app-helper-nav>
-
+<div class="text-center text-warning my-2 h3">Admin DashBoard</div>
 <div class="container my-2">
   <div class="row">
-    <div class="col-md-6 my-5">
+    <div class="col-md-6 my-5" *ngIf="loader">
+      <mat-spinner></mat-spinner>
+    </div>
+    <!-- Rendering the Products Which are available -->
+    <div class="col-md-6 my-5" *ngIf="!loader">
       <ul class="list-group shadow shadow-sm">
         <li class="list-group-item" *ngFor="let item of productsArr">
           <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
           {{item.name}}
           </div>
           <div class="col-md-3">
             {{getCategory(item.category)}}
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             {{item.price | currency :"INR"}}
           </div>
+          <div class="col-md-2">
+            <button mat-raised-button (click)="editItem(item)">Edit</button>
+          </div>
           <div class="col-md-3">
-            <button mat-raised-button color="warn" (click)="editItem(item)">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteItem(item)">Delete</button>
           </div>
         </div>
         </li>
@@ -30,6 +38,7 @@
       </div>
     </div>
     <div class="col-md-6 my-2">
+      <!-- This is the Main Form For Getting User Data -->
       <form class="form my-3" [formGroup]="frm" (submit)="submitData()">
         <div class="form-group border border-2 border-light p-3 shadow shadow-lg rounded-2" id="fg">
           <div *ngIf="!idValidity() && (this.frm?.get('id')?.dirty || this.frm?.get('id')?.touched)" class="alert alert-warning text-center">

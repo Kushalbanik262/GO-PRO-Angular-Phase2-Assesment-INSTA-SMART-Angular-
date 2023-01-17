@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { StarComponent } from 'src/app/Components/stars/star.component';
 import { HelperNavComponent } from '../../Components/helper-nav/helper-nav.component';
 
-
+/**
+ * This is Common Shared Module
+ */
 
 @NgModule({
   declarations: [
-    StarComponent,
-    HelperNavComponent
+    StarComponent,//The Star Component For Rating
+    HelperNavComponent//Helper Nav Component
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { HelperNavComponent } from '../../Components/helper-nav/helper-nav.compo
     MaterialModuleModule,
     RouterModule
   ],
+  //To Use those in Other Modules which Import These we are exporting these
   exports:[
     StarComponent,
     HelperNavComponent

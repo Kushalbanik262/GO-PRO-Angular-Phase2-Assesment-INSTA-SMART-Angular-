@@ -5,31 +5,48 @@ import { InMemoryDbService } from "angular-in-memory-web-api";
 import { Cart } from '../Entities/cart';
 
 
+//This Is the Specific Class For Driving InMemmory WebApi Service
+export class InMemoryWebApi implements InMemoryDbService{ //It Implements InMemoryDbService
 
-export class InMemoryWebApi implements InMemoryDbService{
-
-  createDb(){
-    let users:Users[] = [
+  createDb(){ //It Overrides The CreateDB Method
+    let users:Users[] = [ //Creating Some dummy Users
       {
         id:101,
         name:"Kushal Banik",
         username:"kushal",
         password:"kushal1234",
-        priviledge:UserPriviledges.USER,
+        priviledge:UserPriviledges.USER, //This is the Normal User With name Kushal Banik
         address:"Khardah,Kolkata",
         contact:"kushalbanik93@gmail.com",
         buy:[],
         card:[{
           id:102900147852,
           cvv:"078",
-          name:"Simpli Click:State Bank Of India"
+          name:"SIMPLY CLICK:State Bank Of India"
+        }],
+        locked:false
+      },
+
+      {//Creating Another User
+        id:302,
+        name:"Ayan Sinha",
+        username:"ayan",
+        password:"ayan1234",
+        priviledge:UserPriviledges.ADMIN, //This is the Admin User
+        address:"Nion City Bangalore",
+        contact:"ayan2023@gmail.com",
+        buy:[],
+        card:[{
+          id:102900147852,
+          cvv:"234",
+          name:"PULSE:INDIAN OVERSIS BANK"
         }],
         locked:false
       }
     ];
 
 
-    let sales:sales[] = [
+    let sales:sales[] = [ //Creating five Sales Which will be displayed through Moving caraousel as given Rubrics
       {
         id:1,
         category:"Winter Sale",
@@ -67,13 +84,13 @@ export class InMemoryWebApi implements InMemoryDbService{
         category:"Fruit Fanta",
         details:"All Dry Fruits",
         image:"https://thumbs.dreamstime.com/z/fruits-sale-shop-6621533.jpg",
-        name:"Foot Foodies Sale",
+        name:"Fruit Foodies Sale",
         offer:"5% Off"
       }
     ];
 
 
-    let products:Products[] = [
+    let products:Products[] = [ //Creating Three Products For Initial User of 'Products' Type
       {
         id:12,
         name:"Onion",
@@ -128,9 +145,9 @@ export class InMemoryWebApi implements InMemoryDbService{
       {
         id:20,
         category:productCat.LifeStyle,
-        details:"This Is Fresh Mostorizer perfect for the winter",
+        details:"This Is Fresh Moisturizer perfect for the winter",
         feedback:"This is our one of the best selling product",
-        name:"Nivea Mostorizing Cream",
+        name:"Nivea Moisturizing Cream",
         image:[
           "https://images-us.nivea.com/-/media/media-center-items/8/d/a/295036-web_1010x1180_transparent_png.png",
           "https://www.jiomart.com/images/product/original/490998044/nivea-soft-light-moisturiser-cream-for-face-hands-body-300-ml-product-images-o490998044-p490998044-0-202209150720.jpg",
@@ -143,9 +160,9 @@ export class InMemoryWebApi implements InMemoryDbService{
     ];
 
 
-    let cart:Cart[] =[];
+    let cart:Cart[] =[]; //Creating a Empty Cart as When The Application is Loaded First No operations is performed
 
-    return {users,products,cart,sales};
+    return {users,products,cart,sales}; //Returing The users,Products,cart and sales for using apis
   }
 
 }

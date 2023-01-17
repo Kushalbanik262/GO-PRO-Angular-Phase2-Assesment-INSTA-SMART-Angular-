@@ -21,6 +21,12 @@ export class LoginService{
     this.isLoggedIn = false;
   }
 
+
+  getCurrent(){
+    return this.currentUser;
+  }
+
+
   IsLoggedIn(){
     return this.isLoggedIn;
   }
@@ -41,7 +47,7 @@ export class LoginService{
 
 
   logout(){
-    this.subscribe.unsubscribe();
+    this.subscribe?.unsubscribe();
     this.isLoggedIn = false;
     this.currentUser = {
       ...this.currentUser,

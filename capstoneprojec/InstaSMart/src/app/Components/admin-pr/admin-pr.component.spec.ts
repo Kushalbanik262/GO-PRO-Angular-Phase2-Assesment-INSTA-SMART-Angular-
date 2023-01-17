@@ -8,7 +8,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { AdminPRComponent } from './admin-pr.component';
 
-xdescribe('Add Product Form By The Admin', () => {
+describe('Add Product Form By The Admin', () => {
   let component: AdminPRComponent;
   let fixture: ComponentFixture<AdminPRComponent>;
 
@@ -34,19 +34,19 @@ xdescribe('Add Product Form By The Admin', () => {
     fixture.detectChanges();
   });
 
-  it('should create The Component', () => {
+  it('should create The Component', () => { // The component Must Be Created
     expect(component).toBeTruthy();
   });
 
-  it("The Form Must Be There",()=>{
+  it("The Form Must Be There",()=>{ //The Form Must be Rendered
     expect(component.frm).toBeTruthy();
   });
 
-  it("Initially Form Must Be Invalid",()=>{
+  it("Initially Form Must Be Invalid",()=>{ //After Loading The the form must be Invalid
     expect(component.frm.valid).toBeFalse();
   });
 
-  it("Checking The Validity Of The Form",()=>{
+  it("Checking The Validity Of The Form",()=>{//The Form Must Be Valid is Every Entered Data is According to The Business Logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -62,7 +62,7 @@ xdescribe('Add Product Form By The Admin', () => {
     expect(component.frm.valid).toBeTrue();
   });
 
-  it("Checking The Name Validity Without Letters",()=>{
+  it("Checking The Name Validity Without Letters",()=>{//Form Must Be Invalid If Name is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -70,7 +70,7 @@ xdescribe('Add Product Form By The Admin', () => {
       details:"Auyrvedic Soap",
       feedback:"This is Also Our Best Selling Product",
       image:"../dove.jpg",
-      name:"Dove Soap 1234",
+      name:"Dove Soap 1234",//Numbers given in the name
       price:"300"
     })
 
@@ -79,7 +79,7 @@ xdescribe('Add Product Form By The Admin', () => {
   });
 
 
-  it("Checking With Negative Price",()=>{
+  it("Checking With Negative Price",()=>{ //Form Must Be Invalid If Price is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -88,7 +88,7 @@ xdescribe('Add Product Form By The Admin', () => {
       feedback:"This is Also Our Best Selling Product",
       image:"../dove.jpg",
       name:"Dove Soap",
-      price:"-300"
+      price:"-300"//price is nagative here
     })
 
     fixture.detectChanges();
@@ -97,7 +97,7 @@ xdescribe('Add Product Form By The Admin', () => {
 
 
 
-  it("Checking With Price More than 100000",()=>{
+  it("Checking With Price More than 100000",()=>{  //Form Must Be Invalid If Price is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -106,7 +106,7 @@ xdescribe('Add Product Form By The Admin', () => {
       feedback:"This is Also Our Best Selling Product",
       image:"../dove.jpg",
       name:"Dove Soap",
-      price:"2000000"
+      price:"2000000"//price is greater than 100000
     })
 
     fixture.detectChanges();
@@ -114,7 +114,7 @@ xdescribe('Add Product Form By The Admin', () => {
   });
 
 
-  it("Checking Name with Lessthan two keywords",()=>{
+  it("Checking Name with Less than two keywords",()=>{  //Form Must Be Invalid If Name is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -131,7 +131,7 @@ xdescribe('Add Product Form By The Admin', () => {
   });
 
 
-  it("Checking FeedBack With More Than 100 Words",()=>{
+  it("Checking FeedBack With More Than 100 Words",()=>{ //Form Must Be Invalid If Feedback is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -147,11 +147,12 @@ xdescribe('Add Product Form By The Admin', () => {
     expect(component.frm.valid).toBeFalse();
   });
 
-  it("Checking Details More Than 100 words",()=>{
+  it("Checking Details More Than 100 words",()=>{  //Form Must Be Invalid If Details is not according to the business logic
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
       category:"DAILY",
+      //details more than 100 words
       details:"Auyrvedic Soap.This article provides free, ready-to-use feedback form templates in Microsoft Excel and PDF formats, so you can gather information about your company, processes, products, or employees. Learn what questions to include and how to effectively craft feedback forms to get the answers you need to improve your company’s efficiency.",
       feedback:"This is Also Our Best Selling Product.",
       image:"../dove.jpg",
@@ -163,7 +164,7 @@ xdescribe('Add Product Form By The Admin', () => {
     expect(component.frm.valid).toBeFalse();
   });
 
-  it("Checking Button is disabled when the Form is Invalid",()=>{
+  it("Checking Button is disabled when the Form is Invalid",()=>{  //Checking Add/Update is disbled or not when the form is Invalid
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -180,7 +181,7 @@ xdescribe('Add Product Form By The Admin', () => {
   });
 
 
-  it("Checking Button is not disabled when the Form is Valid",()=>{
+  it("Checking Button is not disabled when the Form is Valid",()=>{//Checking Add/Update is enabled or not when the form is valid
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
@@ -196,7 +197,7 @@ xdescribe('Add Product Form By The Admin', () => {
     expect(fixture.nativeElement.querySelector("#add").disabled).toBeFalse();
   });
 
-  it("Checking Button is Update when Editable Option Is On",()=>{
+  it("Checking Button is Update when Editable Option Is On",()=>{ //Checking Form is Rendering which option when user wants to update data
     fixture.detectChanges();
     component.frm.setValue({
       id:"101",
