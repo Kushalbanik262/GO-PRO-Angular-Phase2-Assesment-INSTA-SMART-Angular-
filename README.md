@@ -2,4 +2,4 @@
 The Phase 2 assesment for Angular Go Pro November Batch. Trainee Name:Kushal Banik EmpID:2157964
 
 #############
-Develpment Time Code only
+Final Code Updated and Last Commit Done 
